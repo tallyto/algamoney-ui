@@ -3,7 +3,6 @@
 @import "primeng/resources/primeng.css";
 
 body {
-  margin: 0;
   font-family: var(--font-family);
   color: #404C51
 }

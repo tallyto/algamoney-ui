@@ -23,7 +23,7 @@
 
   <div class="p-grid">
     <div class="col-12">
-      <p-table [value]="lancamentos" styleClass="p-datatable-gridlines">
+      <p-table [value]="lancamentos" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="5">
         <ng-template pTemplate="header">
           <tr>
             <th>Tipo</th>
