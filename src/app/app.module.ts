@@ -18,7 +18,7 @@ import {TableModule} from "primeng/table";
     TabViewModule,
     InputTextModule,
     ButtonModule,
-    TableModule
+    TableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

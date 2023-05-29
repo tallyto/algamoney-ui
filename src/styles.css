@@ -28,3 +28,8 @@ label {
   width: 120px;
   text-align: center;
 }
+
+.col-actions {
+  width: 130px;
+  align-items: center;
+}
