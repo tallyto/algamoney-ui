@@ -45,8 +45,8 @@
             <td class="col-valor"
                 [ngStyle]="{color: lancamento.tipo === 'DESPESA'? 'red' : 'blue'}">{{ lancamento.valor }}</td>
             <td class="col-actions">
-              <a pButton icon="fas fa-pencil"></a>
-              <button pButton icon="fas fa-trash"></button>
+              <a pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+              <button pButton icon="fas fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>

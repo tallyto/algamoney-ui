@@ -7,19 +7,21 @@ import {TabViewModule} from "primeng/tabview";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
+import {TooltipModule} from "primeng/tooltip";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    TabViewModule,
-    InputTextModule,
-    ButtonModule,
-    TableModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        TabViewModule,
+        InputTextModule,
+        ButtonModule,
+        TableModule,
+        TooltipModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
