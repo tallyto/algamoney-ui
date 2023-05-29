@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {TabViewModule} from "primeng/tabview";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {ButtonModule} from "primeng/button";
     AppRoutingModule,
     TabViewModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
