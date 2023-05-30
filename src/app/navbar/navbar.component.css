@@ -4,5 +4,40 @@
 }
 
 .navbar-toggle {
-  color: #fff
+  color: #ffffff;
+}
+
+.navbar-menu {
+  position: fixed;
+  background-color: #3a3633;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 210px;
+  margin: 0;
+  z-index: 9999;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar-usuario {
+  font-weight: bold;
+  border-bottom: 1px solid #525151;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.navbar-menu-item {
+  padding: 15px;
+}
+
+.navbar-menu-item a {
+  color: #c0bbb7;
+  text-decoration: none;
+}
+
+.navbar-menu-item a:hover {
+  color: #ffffff;
 }
