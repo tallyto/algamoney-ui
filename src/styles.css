@@ -4,7 +4,8 @@
 
 body {
   font-family: var(--font-family);
-  color: #404C51
+  color: #404C51;
+  margin: 0 auto;
 }
 
 label {
