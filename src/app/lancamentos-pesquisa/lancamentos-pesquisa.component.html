@@ -42,10 +42,10 @@
             <td>{{ lancamento.tipo }}</td>
             <td>{{ lancamento.pessoa }}</td>
             <td>{{ lancamento.descricao }}</td>
-            <td class="col-data">{{ lancamento.dataVencimento }}</td>
-            <td class="col-data">{{ lancamento.dataPagamento }}</td>
+            <td class="col-data">{{ lancamento.dataVencimento | date: 'dd/MM/y' }}</td>
+            <td class="col-data">{{ lancamento.dataPagamento | date : 'dd/MM/y'}}</td>
             <td class="col-valor"
-                [ngStyle]="{color: lancamento.tipo === 'DESPESA'? 'red' : 'blue'}">{{ lancamento.valor }}</td>
+                [ngStyle]="{color: lancamento.tipo === 'DESPESA'? 'red' : 'blue'}">{{ lancamento.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td class="col-actions">
               <a pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
               <button pButton icon="fas fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
