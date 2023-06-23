@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -13,13 +13,16 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {PessoasPesquisaComponent} from './pessoas-pesquisa/pessoas-pesquisa.component';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @NgModule({
   declarations: [
     AppComponent,
     LancamentosPesquisaComponent,
     NavbarComponent,
-    PessoasPesquisaComponent
+    PessoasPesquisaComponent,
+    LancamentoCadastroComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import {CommonModule} from "@angular/common";
     TableModule,
     TooltipModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    InputTextareaModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
