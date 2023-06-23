@@ -15,6 +15,8 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {CalendarModule} from "primeng/calendar";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     FormsModule,
     CommonModule,
     InputTextareaModule,
+    CalendarModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

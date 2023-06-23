@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./lancamento-cadastro.component.css']
 })
 export class LancamentoCadastroComponent {
-
+  constructor() {
+  }
 }
