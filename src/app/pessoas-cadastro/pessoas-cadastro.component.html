@@ -1,0 +1,59 @@
+<div class="container">
+  <form>
+    <div class="grid">
+      <div class="col-12" >
+        <h1>Nova Pessoa</h1>
+      </div>
+
+      <div class="p-fluid col-12">
+        <label>Nome</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-9">
+        <label>Logradouro</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-3">
+        <label>Numero</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-4">
+        <label>Complemento</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-4">
+        <label>Bairro</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-4">
+        <label>CEP</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-6">
+        <label>Cidade</label>
+        <input pInputText>
+      </div>
+
+      <div class="p-fluid col-6 sm:col-6">
+        <label>Estado</label>
+        <input pInputText>
+      </div>
+
+      <div class="col-12">
+        <button class="mr-2" pButton type="submit" [disabled]="true" label="Salvar"></button>
+        <button pButton type="button"
+                label="Novo" class="p-button-info">
+        </button>
+        <a  pButton class="p-button-link">Voltar para a pesquisa</a>
+      </div>
+
+    </div>
+  </form>
+
+</div>
