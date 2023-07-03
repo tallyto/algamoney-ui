@@ -9,9 +9,21 @@
 
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario" >José da Silva</li>
-    <li class="navbar-menu-item"><a href="#">Lançamentos</a></li>
-    <li class="navbar-menu-item"><a href="#">Pessoas</a></li>
-    <li class="navbar-menu-item"><a href="#">Logout</a></li>
+    <li class="navbar-menu-item">
+      <a routerLink="/lancamento-pesquisa" routerLinkActive="active">Lançamentos - Pesquisa</a>
+    </li>
+    <li class="navbar-menu-item">
+      <a routerLink="/lancamento-cadastro" routerLinkActive="active">Lançamentos - Cadastro</a>
+    </li>
+    <li class="navbar-menu-item">
+      <a routerLink="/pessoa-pesquisa" routerLinkActive="active">Pessoas - Pesquisa</a>
+    </li>
+    <li class="navbar-menu-item">
+      <a routerLink="/pessoa-cadastro" routerLinkActive="active">Pessoas - Cadastro</a>
+    </li>
+    <li class="navbar-menu-item">
+      <a>Logout</a>
+    </li>
   </ul>
 
 </nav>
