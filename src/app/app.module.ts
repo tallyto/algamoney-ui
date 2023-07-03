@@ -21,6 +21,7 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
 import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
+import {InputMaskModule} from "primeng/inputmask";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.co
     BrowserAnimationsModule,
     SelectButtonModule,
     DropdownModule,
-    PaginatorModule
+    PaginatorModule,
+    InputMaskModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
