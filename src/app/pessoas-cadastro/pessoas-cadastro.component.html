@@ -1,33 +1,39 @@
 <div class="container">
   <form>
     <div class="grid">
-      <div class="col-12" >
+      <div class="col-12">
         <h1>Nova Pessoa</h1>
       </div>
 
       <div class="p-fluid col-12">
         <label>Nome</label>
-        <input pInputText>
+        <input pInputText ngModel name="nome" #nome="ngModel" required>
+        <app-message text="Nome requerido" [control]="nome" error="required"></app-message>
       </div>
 
       <div class="p-fluid col-12 md:col-9">
         <label>Logradouro</label>
-        <input pInputText>
+        <input pInputText ngModel name="logradouro" #logradouro="ngModel" required>
+        <app-message text="Logradouro requerido" [control]="logradouro" error="required"></app-message>
       </div>
 
       <div class="p-fluid md:col-3 col-12">
         <label>Numero</label>
-        <input pInputText>
+        <input pInputText ngModel name="numero" #numero="ngModel" required>
+        <app-message text="Numero requerido" [control]="numero" error="required"></app-message>
       </div>
 
       <div class="p-fluid md:col-4 col-12">
         <label>Complemento</label>
-        <input pInputText>
+        <input pInputText ngModel name="complemento" #complemento="ngModel" required>
+        <app-message text="Complemento requerido" [control]="complemento" error="required"></app-message>
       </div>
 
       <div class="p-fluid md:col-4 col-12">
         <label>Bairro</label>
-        <input pInputText>
+        <input pInputText ngModel name="bairro" #bairro="ngModel" required>
+        <app-message text="Bairro requerido" [control]="bairro" error="required"></app-message>
+
       </div>
 
       <div class="p-fluid md:col-4 col-12">
@@ -37,12 +43,16 @@
 
       <div class="p-fluid md:col-6 col-12">
         <label>Cidade</label>
-        <input pInputText>
+        <input pInputText ngModel name="cidade" #cidade="ngModel" required>
+        <app-message text="Cidade requerido" [control]="cidade" error="required"></app-message>
+
       </div>
 
       <div class="p-fluid md:col-6 col-12">
         <label>Estado</label>
-        <input pInputText>
+        <input pInputText ngModel name="estado" #estado="ngModel" required>
+        <app-message text="Nome requerido" [control]="estado" error="required"></app-message>
+
       </div>
 
       <div class="col-12">
@@ -50,7 +60,7 @@
         <button pButton type="button"
                 label="Novo" class="p-button-info">
         </button>
-        <a  pButton class="p-button-link">Voltar para a pesquisa</a>
+        <a pButton class="p-button-link">Voltar para a pesquisa</a>
       </div>
 
     </div>
