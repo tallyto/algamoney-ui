@@ -22,6 +22,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
 import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
 import {InputMaskModule} from "primeng/inputmask";
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {InputMaskModule} from "primeng/inputmask";
     NavbarComponent,
     PessoasPesquisaComponent,
     LancamentoCadastroComponent,
-    PessoasCadastroComponent
+    PessoasCadastroComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
