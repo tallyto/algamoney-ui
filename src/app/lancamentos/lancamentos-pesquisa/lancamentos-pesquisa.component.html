@@ -5,14 +5,14 @@
     </div>
 
     <div class="col-12 p-fluid">
-      <label>Descrição</label>
+      <label id="descricao">Descrição</label>
       <input type="text" pInputText>
     </div>
 
     <div class="col-12">
-      <label style="display: block">Vencimento</label>
+      <label id="vencimento" style="display: block">Vencimento</label>
       <input pInputText type="text" style="width: 95px">
-      <label>até</label>
+      <label id="ate">até</label>
       <input pInputText type="text" style="width: 95px">
     </div>
 
@@ -20,7 +20,7 @@
       <button pButton type="submit">Pesquisar</button>
     </div>
   </div>
-  <app-pessoas-grid [lancamentos]="lancamentos"></app-pessoas-grid>
+  <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
 </div>
 
 

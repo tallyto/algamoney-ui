@@ -11,46 +11,47 @@
       </div>
 
       <div class="p-fluid col-6 md:col-3">
-        <label>Vencimento</label>
+        <label id="vencimento">Vencimento</label>
         <p-calendar [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="p-fluid col-6 md:col-3">
-        <label>{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+        <label id="receita">{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
         <p-calendar [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="p-fluid col-12 md:col-9">
-        <label>Descrição</label>
+        <label id="descricao">Descrição</label>
         <input pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="5">
         <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
       </div>
       <div class="p-fluid col-6 md:col-3">
-        <label>Valor</label>
-        <p-inputNumber mode="currency" currency="BRL" [min]="0"  [minFractionDigits]="2" [maxFractionDigits]="2" [max]="100000"></p-inputNumber>
+        <label id="valor">Valor</label>
+        <p-inputNumber mode="currency" currency="BRL" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                       [max]="100000"></p-inputNumber>
       </div>
 
       <div class="p-fluid col-12 md:col-6">
-        <label>Categoria</label>
+        <label id="categoria">Categoria</label>
         <p-dropdown [options]="categorias" [filter]="true" placeholder="Selecione"></p-dropdown>
       </div>
 
       <div class="p-fluid col-12 md:col-6">
-        <label>Pessoa</label>
+        <label id="pessoa">Pessoa</label>
         <p-dropdown [options]="pessoas" [filter]="true" placeholder="Selecione"></p-dropdown>
       </div>
 
       <div class="p-fluid col-12">
-        <label>Observação</label>
-        <textarea pInputTextarea rows="3" type="text" ></textarea>
+        <label id="observacao">Observação</label>
+        <textarea pInputTextarea rows="3" type="text"></textarea>
       </div>
 
       <div class="col-12">
         <button class="mr-2" pButton type="submit" [disabled]="true" label="Salvar"></button>
         <button pButton type="button"
-                  label="Novo" class="p-button-info">
+                label="Novo" class="p-button-info">
         </button>
-        <a  pButton class="p-button-link">Voltar para a pesquisa</a>
+        <a pButton class="p-button-link">Voltar para a pesquisa</a>
       </div>
 
     </div>

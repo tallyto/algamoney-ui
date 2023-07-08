@@ -7,5 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class PessoasGridComponent {
   @Input()
-  lancamentos: any
+  pessoa: any
 }

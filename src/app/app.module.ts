@@ -8,33 +8,23 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
-import {LancamentosPesquisaComponent} from './lancamentos-pesquisa/lancamentos-pesquisa.component';
 import {NavbarComponent} from './navbar/navbar.component';
-import {PessoasPesquisaComponent} from './pessoas-pesquisa/pessoas-pesquisa.component';
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {DropdownModule} from "primeng/dropdown";
 import {PaginatorModule} from "primeng/paginator";
-import { PessoasCadastroComponent } from './pessoas-cadastro/pessoas-cadastro.component';
 import {InputMaskModule} from "primeng/inputmask";
-import { MessageComponent } from './message/message.component';
-import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
+import {LancamentosModule} from "./lancamentos/lancamentos.module";
+import {PessoasModule} from "./pessoas/pessoas.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LancamentosPesquisaComponent,
     NavbarComponent,
-    PessoasPesquisaComponent,
-    LancamentoCadastroComponent,
-    PessoasCadastroComponent,
-    MessageComponent,
-    PessoasGridComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +43,12 @@ import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
     DropdownModule,
     PaginatorModule,
     InputMaskModule,
+    LancamentosModule,
+    PessoasModule
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
