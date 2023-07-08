@@ -8,10 +8,9 @@ import {TooltipModule} from "primeng/tooltip";
 import {TableModule} from "primeng/table";
 import {FormsModule} from "@angular/forms";
 import {SelectButtonModule} from "primeng/selectbutton";
-import {SharedModule} from "primeng/api";
 import {InputMaskModule} from "primeng/inputmask";
-import {MessageModule} from "../message/message.module";
 import {InputTextModule} from "primeng/inputtext";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -28,10 +27,9 @@ import {InputTextModule} from "primeng/inputtext";
     TableModule,
     FormsModule,
     SelectButtonModule,
-    SharedModule,
     InputMaskModule,
-    MessageModule,
-    InputTextModule
+    InputTextModule,
+    SharedModule
   ]
 })
 export class PessoasModule { }

@@ -4,7 +4,6 @@ import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.co
 import {LancamentoCadastroComponent} from "./lancamento-cadastro/lancamento-cadastro.component";
 import {LancamentosPesquisaComponent} from "./lancamentos-pesquisa/lancamentos-pesquisa.component";
 import {ButtonModule} from "primeng/button";
-import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
 import {SelectButtonModule} from "primeng/selectbutton";
@@ -12,9 +11,9 @@ import {CalendarModule} from "primeng/calendar";
 import {FormsModule} from "@angular/forms";
 import {InputNumberModule} from "primeng/inputnumber";
 import {DropdownModule} from "primeng/dropdown";
-import {MessageModule} from "../message/message.module";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import {InputTextareaModule} from "primeng/inputtextarea";
   imports: [
     CommonModule,
     ButtonModule,
-    SharedModule,
     TableModule,
     TooltipModule,
     SelectButtonModule,
@@ -33,9 +31,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     FormsModule,
     InputNumberModule,
     DropdownModule,
-    MessageModule,
     InputTextModule,
-    InputTextareaModule
+    InputTextareaModule,
+    SharedModule
   ],
   exports: [
     LancamentosGridComponent
