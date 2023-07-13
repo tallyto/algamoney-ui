@@ -14,6 +14,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {SharedModule} from "../shared/shared.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {SharedModule} from "../shared/shared.module";
     DropdownModule,
     InputTextModule,
     InputTextareaModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   exports: [
     LancamentosGridComponent
