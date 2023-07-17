@@ -11,9 +11,9 @@
 
     <div class="col-12">
       <label id="vencimento" style="display: block">Vencimento</label>
-      <input pInputText type="text" style="width: 95px">
+      <p-calendar name="vencimentoInicio" [(ngModel)]="dataVencimentoInicio" dateFormat="dd/mm/yy" [inputStyle]="{width: '95px'}"></p-calendar>
       <label id="ate">até</label>
-      <input pInputText type="text" style="width: 95px">
+      <p-calendar name="vencimentoFim" [(ngModel)]="dataVencimentoFim" dateFormat="dd/mm/yy" [inputStyle]="{width: '95px'}"></p-calendar>
     </div>
 
     <div class="col-12">

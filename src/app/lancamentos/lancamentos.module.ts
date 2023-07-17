@@ -16,6 +16,7 @@ import {SharedModule} from "../shared/shared.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {LancamentoService} from "./lancamento.service";
+import {MessageModule} from "primeng/message";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {LancamentoService} from "./lancamento.service";
     InputTextareaModule,
     SharedModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MessageModule
   ],
   exports: [
   ],
