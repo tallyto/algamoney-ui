@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import {LancamentoCadastroComponent} from "./lancamento-cadastro/lancamento-cadastro.component";
 import {LancamentosPesquisaComponent} from "./lancamentos-pesquisa/lancamentos-pesquisa.component";
 import {ButtonModule} from "primeng/button";
@@ -15,10 +14,11 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {SharedModule} from "../shared/shared.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from "@angular/common/http";
+import {LancamentoService} from "./lancamento.service";
 
 @NgModule({
   declarations: [
-    LancamentosGridComponent,
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent
   ],
@@ -35,10 +35,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     InputTextModule,
     InputTextareaModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   exports: [
-    LancamentosGridComponent
-  ]
+  ],
+  providers: [LancamentoService]
 })
 export class LancamentosModule { }
