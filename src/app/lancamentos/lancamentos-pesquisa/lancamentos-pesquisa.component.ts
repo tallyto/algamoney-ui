@@ -12,6 +12,12 @@ export class LancamentosPesquisaComponent implements OnInit {
   public descricao = ''
   dataVencimentoInicio: Date
   dataVencimentoFim: Date
+  itensPorPagina = 10
+  pagina = 0
+  totalRecords: number;
+  loading = true;
+  first: number;
+
   constructor(private lancamentoService: LancamentoService) {
   }
 
@@ -24,17 +30,28 @@ export class LancamentosPesquisaComponent implements OnInit {
     const filtro: LancamentoFiltro = {
       descricao: this.descricao,
       dataVencimentoInicio: this.dataVencimentoInicio,
-      dataVencimentoFim: this.dataVencimentoFim
+      dataVencimentoFim: this.dataVencimentoFim,
+      itensPorPagina: this.itensPorPagina,
+      pagina: this.pagina
     }
 
     this.lancamentoService.pesquisar(filtro).subscribe(
       {
         next: (result: any) => {
           this.lancamentos = result.content as Lancamento[];
+          this.totalRecords = result.totalElements;
+          this.loading = false;
         }
       }
     )
   }
+
+  onPageChange(event: any) {
+    this.itensPorPagina = event.rows
+    this.pagina = event.first / event.rows
+    this.pesquisar()
+  }
+
 }
 
 interface Lancamento {

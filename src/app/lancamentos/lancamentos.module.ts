@@ -17,6 +17,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {LancamentoService} from "./lancamento.service";
 import {MessageModule} from "primeng/message";
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MessageModule} from "primeng/message";
     SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MessageModule
+    MessageModule,
+    PaginatorModule
   ],
   exports: [
   ],

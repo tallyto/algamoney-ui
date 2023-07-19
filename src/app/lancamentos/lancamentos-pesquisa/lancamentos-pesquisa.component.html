@@ -11,9 +11,11 @@
 
     <div class="col-12">
       <label id="vencimento" style="display: block">Vencimento</label>
-      <p-calendar name="vencimentoInicio" [(ngModel)]="dataVencimentoInicio" dateFormat="dd/mm/yy" [inputStyle]="{width: '95px'}"></p-calendar>
+      <p-calendar name="vencimentoInicio" [(ngModel)]="dataVencimentoInicio" dateFormat="dd/mm/yy"
+                  [inputStyle]="{width: '95px'}"></p-calendar>
       <label id="ate">até</label>
-      <p-calendar name="vencimentoFim" [(ngModel)]="dataVencimentoFim" dateFormat="dd/mm/yy" [inputStyle]="{width: '95px'}"></p-calendar>
+      <p-calendar name="vencimentoFim" [(ngModel)]="dataVencimentoFim" dateFormat="dd/mm/yy"
+                  [inputStyle]="{width: '95px'}"></p-calendar>
     </div>
 
     <div class="col-12">
@@ -24,7 +26,12 @@
     <div class="col-12">
       <p-table [value]="lancamentos" styleClass="p-datatable-gridlines"
                responsiveLayout="stack" [breakpoint]="'960px'"
-               [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="5">
+               [loading]="loading"
+               [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="itensPorPagina"
+               [totalRecords]="totalRecords" (onPage)="onPageChange($event)"
+               [rowsPerPageOptions]="[10, 25, 50]" dataKey="codigo"
+               [lazy]="true"
+      >
         <ng-template pTemplate="header">
           <tr>
             <th>Tipo</th>
@@ -57,7 +64,6 @@
     <div class="col-12">
       <p-button label="Novo Lançamento"></p-button>
     </div>
-
   </div>
 </div>
 
