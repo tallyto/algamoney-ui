@@ -7,10 +7,18 @@ import {LancamentosModule} from "./lancamentos/lancamentos.module";
 import {PessoasModule} from "./pessoas/pessoas.module";
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import { LoginComponent } from './login/login.component';
+import {FormsModule} from "@angular/forms";
+import {CardModule} from "primeng/card";
+import {InputTextModule} from "primeng/inputtext";
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,9 +26,16 @@ import {CoreModule} from "./core/core.module";
     SharedModule,
     LancamentosModule,
     PessoasModule,
-    CoreModule
+    CoreModule,
+    FormsModule,
+    CardModule,
+    InputTextModule,
+    ButtonModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
+  ],
   exports: [
   ],
   bootstrap: [AppComponent]

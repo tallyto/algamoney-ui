@@ -21,8 +21,6 @@ export class LancamentoService {
   }
 
   public pesquisar(filtro: LancamentoFiltro) {
-    const token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6InRhbGx5dG8iLCJleHAiOjE2ODk3MzYzNjR9.T-MrM26WWunzjm6JBm15NxImIbgzMBdQRhiCyt8BfpQ";
-
     let params = new HttpParams();
     if (filtro?.descricao) {
       params = params.append('descricao', filtro.descricao);
@@ -38,9 +36,6 @@ export class LancamentoService {
     params = params.append("size", filtro.itensPorPagina)
 
     return this.http.get(this.baseUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
       params: params
     });
   }

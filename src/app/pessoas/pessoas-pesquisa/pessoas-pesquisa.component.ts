@@ -1,29 +1,60 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PessoaFilter, PessoasService} from "../pessoas.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
-export class PessoasPesquisaComponent {
-  public pessoa: Pessoa[] = [
-    { nome: "João", cidade: "São Paulo", estado: "SP", status: true },
-    { nome: "Maria", cidade: "Rio de Janeiro", estado: "RJ", status: true },
-    { nome: "Pedro", cidade: "Belo Horizonte", estado: "MG", status: false },
-    { nome: "Ana", cidade: "Porto Alegre", estado: "RS", status: true },
-    { nome: "Lucas", cidade: "Salvador", estado: "BA", status: true },
-    { nome: "Carla", cidade: "Fortaleza", estado: "CE", status: false },
-    { nome: "Fernando", cidade: "Recife", estado: "PE", status: true },
-    { nome: "Mariana", cidade: "Curitiba", estado: "PR", status: true },
-    { nome: "Rodrigo", cidade: "Brasília", estado: "DF", status: false },
-    { nome: "Camila", cidade: "Manaus", estado: "AM", status: true },
-    { nome: "Gustavo", cidade: "Belém", estado: "PA", status: true },
-    { nome: "Larissa", cidade: "Vitória", estado: "ES", status: false },
-    { nome: "Rafael", cidade: "Porto Velho", estado: "RO", status: true },
-    { nome: "Amanda", cidade: "Goiânia", estado: "GO", status: true },
-    { nome: "Diego", cidade: "Natal", estado: "RN", status: false },
-    { nome: "Patrícia", cidade: "Florianópolis", estado: "SC", status: true }
-  ];
+export class PessoasPesquisaComponent implements OnInit, OnDestroy{
+  public pessoa: Pessoa[] = []
+  public nome: string
+
+  private unsubscribe = new Subject<void>()
+  itensPorPagina = 10
+  pagina = 0
+  totalRecords: number;
+  loading = true;
+
+
+  constructor(private pessoaService: PessoasService) {
+
+  }
+
+  ngOnInit() {
+    this.pesquisar()
+  }
+
+  public pesquisar() {
+    const filter: PessoaFilter = {
+      nome: this.nome,
+      page: this.pagina,
+      size: this.itensPorPagina
+    }
+
+    this.pessoaService.pesquisar(filter).pipe(takeUntil(this.unsubscribe)).subscribe({
+      next: ((result: any) => {
+        this.pessoa = result.content;
+        this.totalRecords = result.totalElements
+        this.itensPorPagina = result.numberOfElements
+        this.loading = false;
+      })
+    })
+  }
+
+  onPageChange(event: any) {
+    this.itensPorPagina = event.rows
+    this.pagina = event.first / event.rows
+    this.pesquisar()
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next()
+    this.unsubscribe.complete()
+  }
+
+
 }
 
 interface Pessoa {

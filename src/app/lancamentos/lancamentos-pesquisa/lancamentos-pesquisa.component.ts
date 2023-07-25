@@ -16,7 +16,6 @@ export class LancamentosPesquisaComponent implements OnInit {
   pagina = 0
   totalRecords: number;
   loading = true;
-  first: number;
 
   constructor(private lancamentoService: LancamentoService) {
   }

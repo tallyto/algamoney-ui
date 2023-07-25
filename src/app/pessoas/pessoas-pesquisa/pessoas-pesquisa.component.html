@@ -6,15 +6,63 @@
 
     <div class="col-12 p-fluid">
       <label>Nome</label>
-      <input type="text" pInputText>
+      <input type="text" pInputText [(ngModel)]="nome" >
     </div>
 
     <div class="col-12">
-      <button pButton type="submit">Pesquisar</button>
+      <button pButton type="submit" [disabled]="!nome" (click)="pesquisar()">Pesquisar</button>
     </div>
 
   </div>
 
-  <app-pessoas-grid [pessoa]="pessoa"></app-pessoas-grid>
+  <div class="p-grid">
+    <ng-container *ngIf="!pessoa || pessoa.length === 0">
+      <div class="col-12">
+        <p>Nenhuma pessoa encontrada.</p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="pessoa && pessoa.length > 0">
+      <div class="col-12">
+        <p-table [value]="pessoa" styleClass="p-datatable-gridlines"
+                 responsiveLayout="stack" [breakpoint]="'960px'"
+                 [loading]="loading"
+                 [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="itensPorPagina"
+                 [totalRecords]="totalRecords" (onPage)="onPageChange($event)"
+                 [rowsPerPageOptions]="[10, 25, 50]" dataKey="codigo"
+                 [lazy]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nome</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-pessoa>
+            <tr>
+              <td>{{ pessoa.nome }}</td>
+              <td>{{ pessoa.endereco.cidade }}</td>
+              <td>{{ pessoa.endereco.estado }}</td>
+              <td>
+                <a pTooltip="{{pessoa.ativo === true ? 'Desativar' : 'Ativar'}}" tooltipPosition="top">
+                  {{ pessoa.ativo === true ? 'Ativo' : 'Inativo'  }}
+                </a>
+              </td>
+              <td class="col-actions">
+                <button pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+                <button pButton icon="fas fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </ng-container>
+
+    <div class="col-12">
+      <p-button label="Nova Pessoa"></p-button>
+    </div>
+  </div>
+
 
 </div>
