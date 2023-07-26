@@ -55,6 +55,9 @@ export class PessoasPesquisaComponent implements OnInit, OnDestroy{
   }
 
 
+  onRemove(codigo: any) {
+    this.pessoaService.excluir(codigo).subscribe(()=> {this.pesquisar()})
+  }
 }
 
 interface Pessoa {

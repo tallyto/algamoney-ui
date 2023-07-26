@@ -30,7 +30,7 @@
                [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="itensPorPagina"
                [totalRecords]="totalRecords" (onPage)="onPageChange($event)"
                [rowsPerPageOptions]="[10, 25, 50]" dataKey="codigo"
-               [lazy]="true"
+               [lazy]="true" #tabela
       >
         <ng-template pTemplate="header">
           <tr>
@@ -54,7 +54,7 @@
                 [ngStyle]="{color: lancamento.tipo === 'DESPESA'? 'red' : 'blue'}">{{ lancamento.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td class="col-actions">
               <a pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-              <button pButton icon="fas fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button pButton icon="fas fa-trash" pTooltip="Excluir" (click)="onRemove(lancamento.codigo)" tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>

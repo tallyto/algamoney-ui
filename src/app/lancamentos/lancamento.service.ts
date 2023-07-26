@@ -40,4 +40,8 @@ export class LancamentoService {
     });
   }
 
+  excluir(codigo: number){
+    return this.http.delete(`${this.baseUrl}/${codigo}`)
+  }
+
 }

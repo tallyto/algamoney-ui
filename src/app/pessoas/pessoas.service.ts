@@ -25,6 +25,10 @@ export class PessoasService {
       params: params
     });
   }
+
+  excluir(codigo: any) {
+    return this.http.delete(`${this.baseUrl}/${codigo}`)
+  }
 }
 
 export interface PessoaFilter {
