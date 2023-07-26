@@ -15,11 +15,14 @@ import {CardModule} from "primeng/card";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {AuthErrorInterceptor} from "./interceptors/auth-error.interceptor";
+import { LogoutComponent } from './logout/logout/logout.component';
+import {PasswordModule} from "primeng/password";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import {AuthErrorInterceptor} from "./interceptors/auth-error.interceptor";
     FormsModule,
     CardModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    PasswordModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

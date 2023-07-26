@@ -1,20 +1,24 @@
-<div class="p-grid p-justify-center">
-  <div class="p-col-6">
-    <p-card>
-      <h1>Login</h1>
-      <form (submit)="onSubmit()">
-        <div class="p-fluid">
-          <div class="p-field">
-            <label for="username">Usuário</label>
-            <input id="username" type="text" pInputText [(ngModel)]="username" name="username">
+<div class="container">
+  <div class="p-grid p-justify-center">
+    <div class="p-col-6">
+      <p-card>
+        <ng-template pTemplate="header">
+          <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+        </ng-template>
+        <form (submit)="onSubmit()">
+          <div class="p-fluid">
+            <div class="p-field">
+              <label for="username">Usuário</label>
+              <input id="username" type="text" pInputText [(ngModel)]="username" name="username">
+            </div>
+            <div class="p-field">
+              <label for="password">Senha</label>
+              <p-password id="password" name="password" [(ngModel)]="password" [toggleMask]="true"></p-password>
+            </div>
+            <button class="mt-2" type="submit" pButton label="Entrar"></button>
           </div>
-          <div class="p-field">
-            <label for="password">Senha</label>
-            <input id="password" type="password" pInputText [(ngModel)]="password" name="password">
-          </div>
-          <button type="submit" pButton label="Entrar"></button>
-        </div>
-      </form>
-    </p-card>
+        </form>
+      </p-card>
+    </div>
   </div>
 </div>

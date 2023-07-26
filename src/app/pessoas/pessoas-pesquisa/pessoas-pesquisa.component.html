@@ -29,7 +29,7 @@
                  [tableStyle]="{'min-width': '50rem'}" [paginator]="true" [rows]="itensPorPagina"
                  [totalRecords]="totalRecords" (onPage)="onPageChange($event)"
                  [rowsPerPageOptions]="[10, 25, 50]" dataKey="codigo"
-                 [lazy]="true">
+                 [lazy]="true" #table>
           <ng-template pTemplate="header">
             <tr>
               <th>Nome</th>
@@ -50,8 +50,8 @@
                 </a>
               </td>
               <td class="col-actions">
-                <button pButton icon="fas fa-pencil" pTooltip="Editar" (click)="onRemove(pessoa.codigo)" tooltipPosition="top"></button>
-                <button pButton icon="fas fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+                <button pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+                <button pButton icon="fas fa-trash" (click)="onRemove(pessoa.codigo)" pTooltip="Excluir" tooltipPosition="top"></button>
               </td>
             </tr>
           </ng-template>

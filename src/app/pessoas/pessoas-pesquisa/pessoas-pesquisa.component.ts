@@ -1,6 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PessoaFilter, PessoasService} from "../pessoas.service";
 import {Subject, takeUntil} from "rxjs";
+import {Table} from "primeng/table";
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -8,6 +9,7 @@ import {Subject, takeUntil} from "rxjs";
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
 export class PessoasPesquisaComponent implements OnInit, OnDestroy{
+  @ViewChild('table') grid: Table
   public pessoa: Pessoa[] = []
   public nome: string
 
@@ -56,7 +58,10 @@ export class PessoasPesquisaComponent implements OnInit, OnDestroy{
 
 
   onRemove(codigo: any) {
-    this.pessoaService.excluir(codigo).subscribe(()=> {this.pesquisar()})
+    this.pessoaService.excluir(codigo).subscribe(()=> {
+      this.grid.first = 0;
+      this.pesquisar()
+    })
   }
 }
 

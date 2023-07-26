@@ -6,7 +6,6 @@ import {catchError, map, Observable, of, tap} from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated: boolean;
   private token: string = '';
 
   constructor(private http: HttpClient) {}
@@ -24,7 +23,6 @@ export class AuthService {
         // Se a resposta da API contiver o token JWT, armazene-o e defina o estado de autenticação como verdadeiro
         if (response.token) {
           this.token = response.token;
-          this.isAuthenticated = true;
           // Armazene o token no localStorage (opcional)
           localStorage.setItem('accessToken', this.token);
         }
@@ -41,13 +39,7 @@ export class AuthService {
 
   // Método para realizar logout e limpar o estado de autenticação e o token
   logout(): void {
-    this.isAuthenticated = false;
-    this.token = '';
-  }
-
-  // Método para verificar se o usuário está autenticado
-  isAuthenticatedUser(): boolean {
-    return this.isAuthenticated;
+    localStorage.setItem('accessToken', '');
   }
 
   // Método para obter o token JWT
