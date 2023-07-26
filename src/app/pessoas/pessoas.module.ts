@@ -10,6 +10,8 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {InputMaskModule} from "primeng/inputmask";
 import {InputTextModule} from "primeng/inputtext";
 import {SharedModule} from "../shared/shared.module";
+import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
 
 
 
@@ -18,16 +20,18 @@ import {SharedModule} from "../shared/shared.module";
     PessoasPesquisaComponent,
     PessoasCadastroComponent
   ],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    TooltipModule,
-    TableModule,
-    FormsModule,
-    SelectButtonModule,
-    InputMaskModule,
-    InputTextModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        ButtonModule,
+        TooltipModule,
+        TableModule,
+        FormsModule,
+        SelectButtonModule,
+        InputMaskModule,
+        InputTextModule,
+        SharedModule,
+        ToastModule
+    ],
+  providers: [MessageService]
 })
 export class PessoasModule { }

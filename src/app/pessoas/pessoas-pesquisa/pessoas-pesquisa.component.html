@@ -1,4 +1,5 @@
 <div class="container">
+  <p-toast></p-toast>
   <div class="p-grid">
     <div class="col-12">
       <h1>Pessoas</h1>
@@ -50,9 +51,12 @@
                 </a>
               </td>
               <td class="col-actions">
-                <button pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
-                <button pButton icon="fas fa-trash" (click)="onRemove(pessoa.codigo)" pTooltip="Excluir" tooltipPosition="top"></button>
+                <div class="button-container">
+                  <button pButton style="margin: 0 5px" icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+                  <button pButton style="margin: 0 5px" icon="fas fa-trash" (click)="onRemove(pessoa.codigo)" pTooltip="Excluir" tooltipPosition="top"></button>
+                </div>
               </td>
+
             </tr>
           </ng-template>
         </p-table>

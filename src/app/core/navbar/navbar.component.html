@@ -2,7 +2,7 @@
   <div class="container">
     <div class="p-grid">
       <div class="col-12">
-        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu  = !exibindoMenu"><i class="fas fa-bars"></i></a>
+        <a class="navbar-toggle" (click)="handlerMenu()"><i class="fas fa-bars"></i></a>
       </div>
     </div>
   </div>
@@ -10,26 +10,26 @@
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario" >José da Silva</li>
     <li class="navbar-menu-item">
-      <a routerLink="/lancamento-pesquisa" routerLinkActive="active">Lançamentos - Pesquisa</a>
+      <a routerLink="/lancamento-pesquisa" routerLinkActive="active" (click)="handlerMenu()">Lançamentos - Pesquisa</a>
     </li>
     <li class="navbar-menu-item">
-      <a routerLink="/lancamento-cadastro" routerLinkActive="active">Lançamentos - Cadastro</a>
+      <a routerLink="/lancamento-cadastro" routerLinkActive="active" (click)="handlerMenu()">Lançamentos - Cadastro</a>
     </li>
     <li class="navbar-menu-item">
-      <a routerLink="/pessoa-pesquisa" routerLinkActive="active">Pessoas - Pesquisa</a>
+      <a routerLink="/pessoa-pesquisa" routerLinkActive="active" (click)="handlerMenu()">Pessoas - Pesquisa</a>
     </li>
     <li class="navbar-menu-item">
-      <a routerLink="/pessoa-cadastro" routerLinkActive="active">Pessoas - Cadastro</a>
+      <a routerLink="/pessoa-cadastro" routerLinkActive="active" (click)="handlerMenu()">Pessoas - Cadastro</a>
     </li>
     <li class="navbar-menu-item">
-      <a routerLink="/pessoa-cadastro" routerLinkActive="active">Pessoas - Cadastro</a>
+      <a routerLink="/pessoa-cadastro" routerLinkActive="active" (click)="handlerMenu()">Pessoas - Cadastro</a>
     </li>
     <li class="navbar-menu-item">
-      <a routerLink="/lancamento-cadastro" routerLinkActive="active">Lançamentos - Cadastro</a>
+      <a routerLink="/lancamento-cadastro" routerLinkActive="active" (click)="handlerMenu()">Lançamentos - Cadastro</a>
     </li>
 
     <li class="navbar-menu-item">
-      <a routerLink="/logout" routerLinkActive="active">Logout</a>
+      <a routerLink="/logout" routerLinkActive="active" (click)="handlerMenu()">Logout</a>
     </li>
 
   </ul>

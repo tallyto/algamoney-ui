@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   exibindoMenu = false;
+
+  handlerMenu(){
+      this.exibindoMenu = !this.exibindoMenu
+  }
 }

@@ -35,7 +35,7 @@ import {PasswordModule} from "primeng/password";
     CardModule,
     InputTextModule,
     ButtonModule,
-    PasswordModule
+    PasswordModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

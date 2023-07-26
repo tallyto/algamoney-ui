@@ -1,4 +1,5 @@
 <div class="container">
+  <p-toast></p-toast>
   <div class="p-grid">
     <div class="col-12">
       <h1>Lançamentos</h1>
@@ -13,7 +14,7 @@
       <label id="vencimento" style="display: block">Vencimento</label>
       <p-calendar name="vencimentoInicio" [(ngModel)]="dataVencimentoInicio" dateFormat="dd/mm/yy"
                   [inputStyle]="{width: '95px'}"></p-calendar>
-      <label id="ate">até</label>
+      <label class="mr-2 ml-2" id="ate">até</label>
       <p-calendar name="vencimentoFim" [(ngModel)]="dataVencimentoFim" dateFormat="dd/mm/yy"
                   [inputStyle]="{width: '95px'}"></p-calendar>
     </div>
@@ -23,6 +24,12 @@
     </div>
   </div>
   <div class="p-grid">
+    <ng-container *ngIf="!lancamentos || lancamentos.length === 0">
+      <div class="col-12">
+        <p>Nenhum lançamento encontrado.</p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="lancamentos && lancamentos.length > 0">
     <div class="col-12">
       <p-table [value]="lancamentos" styleClass="p-datatable-gridlines"
                responsiveLayout="stack" [breakpoint]="'960px'"
@@ -53,13 +60,16 @@
             <td class="col-valor"
                 [ngStyle]="{color: lancamento.tipo === 'DESPESA'? 'red' : 'blue'}">{{ lancamento.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td class="col-actions">
-              <a pButton icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-              <button pButton icon="fas fa-trash" pTooltip="Excluir" (click)="onRemove(lancamento.codigo)" tooltipPosition="top"></button>
+              <div class="button-container">
+                <button pButton style="margin: 0 5px" icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+                <button pButton style="margin: 0 5px" icon="fas fa-trash" (click)="onRemove(lancamento.codigo)" pTooltip="Excluir" tooltipPosition="top"></button>
+              </div>
             </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
+    </ng-container>
 
     <div class="col-12">
       <p-button label="Novo Lançamento"></p-button>

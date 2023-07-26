@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { LancamentoFiltro, LancamentoService } from '../lancamento.service';
 import {Table} from "primeng/table";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
   templateUrl: './lancamentos-pesquisa.component.html',
-  styleUrls: ['./lancamentos-pesquisa.component.css']
+  styleUrls: ['./lancamentos-pesquisa.component.css'],
 })
 export class LancamentosPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid: Table
@@ -18,16 +19,14 @@ export class LancamentosPesquisaComponent implements OnInit {
   totalRecords: number;
   loading = true;
 
-  constructor(private lancamentoService: LancamentoService) {}
+  constructor(private lancamentoService: LancamentoService,
+              private messageService: MessageService
+              ) {}
 
   ngOnInit() {
-    this.updateGrid();
+    this.pesquisar()
   }
 
-  public updateGrid() {
-    // Atualizar a página com os filtros atuais
-    this.pesquisar();
-  }
 
   public pesquisar() {
     const filtro: LancamentoFiltro = {
@@ -49,15 +48,19 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   onPageChange(event: any) {
     this.itensPorPagina = event.rows;
-    this.pagina = event.first / event.rows;
-    this.updateGrid(); // Quando a página muda, atualizamos a grid
+    this.pagina = event.first / event.rows
+    this.pesquisar()
   }
 
   onRemove(codigo: any) {
     this.lancamentoService.excluir(codigo).subscribe(() => {
       // Após a exclusão, redefinimos os filtros e atualizamos a grid
-      this.grid.first = 0;
-      this.updateGrid();
+      if(this.grid.first == 0) {
+        this.pesquisar()
+      }{
+        this.grid.first = 0;
+      }
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Lançamento removido com sucesso!' });
     });
   }
 }

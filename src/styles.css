@@ -30,6 +30,11 @@ label {
 }
 
 .col-actions {
-  width: 130px;
-  align-items: center;
+  width: 150px;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+

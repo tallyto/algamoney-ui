@@ -18,32 +18,35 @@ import {HttpClientModule} from "@angular/common/http";
 import {LancamentoService} from "./lancamento.service";
 import {MessageModule} from "primeng/message";
 import {PaginatorModule} from "primeng/paginator";
+import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent
   ],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    TableModule,
-    TooltipModule,
-    SelectButtonModule,
-    CalendarModule,
-    FormsModule,
-    InputNumberModule,
-    DropdownModule,
-    InputTextModule,
-    InputTextareaModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MessageModule,
-    PaginatorModule
-  ],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        TableModule,
+        TooltipModule,
+        SelectButtonModule,
+        CalendarModule,
+        FormsModule,
+        InputNumberModule,
+        DropdownModule,
+        InputTextModule,
+        InputTextareaModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MessageModule,
+        PaginatorModule,
+        ToastModule
+    ],
   exports: [
   ],
-  providers: [LancamentoService]
+  providers: [LancamentoService, MessageService]
 })
 export class LancamentosModule { }
