@@ -14,6 +14,7 @@ import {FormsModule} from "@angular/forms";
 import {CardModule} from "primeng/card";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
+import {AuthErrorInterceptor} from "./interceptors/auth-error.interceptor";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {ButtonModule} from "primeng/button";
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
   ],
   exports: [
   ],

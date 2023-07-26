@@ -17,7 +17,6 @@ export class LoginComponent {
   onSubmit(): void {
     this.authService.login(this.username, this.password).subscribe(
       (loginSuccess) => {
-        debugger
         if (loginSuccess) {
           console.log('Login realizado com sucesso!');
           // Redirecionar para a página de pesquisa de pessoas após o login bem-sucedido
