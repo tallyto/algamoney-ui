@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CategoriasService} from "../../categorias/categorias.service";
 
 @Component({
   selector: 'app-lancamento-cadastro',
   templateUrl: './lancamento-cadastro.component.html',
   styleUrls: ['./lancamento-cadastro.component.css']
 })
-export class LancamentoCadastroComponent {
+export class LancamentoCadastroComponent implements OnInit{
+
+  categorias = []
+
   tipos = [
     {label: 'Receita', value: 'RECEITA'},
     {label: 'Despesa', value: 'DESPESA'}
-  ]
-
-  categorias = [
-    {label: "Alimentacao", value: 1},
-    {label: "Transporte", value: 2}
   ]
 
   pessoas = [
@@ -22,6 +21,29 @@ export class LancamentoCadastroComponent {
     {label: "Gustavo", value: 3}
   ]
 
-  constructor() {
+  constructor(private categoriasService: CategoriasService) {
+
   }
+
+  private handlerCategorias() {
+    this.categoriasService.listar().subscribe({
+      next: (value: any) => {
+        this.categorias = value.map((categoria: Categoria) => {
+          return {
+            label: categoria.nome,
+            value: categoria.codigo
+          }
+        });
+      }
+    })
+  }
+
+  ngOnInit(): void {
+    this.handlerCategorias()
+  }
+}
+
+interface Categoria {
+  codigo: number;
+  nome: string;
 }
