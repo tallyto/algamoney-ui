@@ -29,6 +29,10 @@ export class PessoasService {
   excluir(codigo: any) {
     return this.http.delete(`${this.baseUrl}/${codigo}`)
   }
+
+  handlerStatus(codigo: number, status: boolean) {
+    return this.http.put(`${this.baseUrl}/${codigo}/ativo`, !status)
+  }
 }
 
 export interface PessoaFilter {

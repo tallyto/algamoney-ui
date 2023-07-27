@@ -7,6 +7,8 @@ import {ErroHandlerService} from "../../core/erro-handler.service";
 const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pessoa removida com sucesso!'};
 const REJECT_MESSAGE = {severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação'};
 const CANCEL_MESSAGE = {severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a ação'};
+const STATUS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Status alterado com sucesso!'};
+
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -74,16 +76,19 @@ export class PessoasPesquisaComponent implements OnInit {
   private handleAccept(codigo: any) {
     this.pessoaService.excluir(codigo).subscribe({
       next: () => {
-        // Após a exclusão, redefinimos os filtros e atualizamos a grid
-        this.grid.first = 0; // Redefinimos o valor do primeiro item da grid
-        this.pagina = 0;
-        this.pesquisar(); // Atualizamos a grid
         this.messageService.add(SUCCESS_MESSAGE);
+        this.updateGird()
       },
       error: err => {
         this.erroHandler.handler(err)
       }
     });
+  }
+
+  private updateGird() {
+    this.grid.first = 0; // Redefinimos o valor do primeiro item da grid
+    this.pagina = 0;
+    this.pesquisar(); // Atualizamos a grid
   }
 
   private handleReject(type: ConfirmEventType) {
@@ -97,6 +102,14 @@ export class PessoasPesquisaComponent implements OnInit {
     }
   }
 
+  handlerStatus(codigo: number, status: boolean) {
+    this.pessoaService.handlerStatus(codigo, status).subscribe({
+      next: () => {
+        this.messageService.add(STATUS_MESSAGE);
+        this.updateGird()
+      }
+    })
+  }
 }
 
 interface Pessoa {
