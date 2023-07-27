@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaFilter, PessoasService } from "../pessoas.service";
 import { Table } from "primeng/table";
 import {MessageService} from "primeng/api";
+import {ErroHandlerService} from "../../core/erro-handler.service";
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -19,7 +20,8 @@ export class PessoasPesquisaComponent implements OnInit {
   loading = true;
 
   constructor(private messageService: MessageService,
-              private pessoaService: PessoasService
+              private pessoaService: PessoasService,
+              private erroHandler: ErroHandlerService
   ) {}
 
   ngOnInit() {
@@ -38,7 +40,10 @@ export class PessoasPesquisaComponent implements OnInit {
         this.pessoa = result.content;
         this.totalRecords = result.totalElements;
         this.loading = false;
-      })
+      }),
+      error: err => {
+        this.erroHandler.handler(err)
+      }
     });
   }
 
@@ -49,13 +54,18 @@ export class PessoasPesquisaComponent implements OnInit {
   }
 
   onRemove(codigo: any) {
-    this.pessoaService.excluir(codigo).subscribe(() => {
-      if (this.grid.first === 0) {
-        this.pesquisar();
-      } else {
-        this.grid.first = 0;
+    this.pessoaService.excluir(codigo).subscribe({
+      next: () => {
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.first = 0;
+        }
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pessoa removida com sucesso!' });
+      },
+      error: err => {
+        this.erroHandler.handler(err)
       }
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pessoa removida com sucesso!' });
     });
   }
 }

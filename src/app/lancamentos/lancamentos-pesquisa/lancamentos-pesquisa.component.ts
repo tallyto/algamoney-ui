@@ -1,12 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { LancamentoFiltro, LancamentoService } from '../lancamento.service';
+import {LancamentoFiltro, LancamentoService} from '../lancamento.service';
 import {Table} from "primeng/table";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
+import {ErroHandlerService} from "../../core/erro-handler.service";
 
 
-const SUCCESS_MESSAGE  = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento removido com sucesso!' };
-const REJECT_MESSAGE  = { severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação' };
-const CANCEL_MESSAGE  = { severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a ação' };
+const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Lançamento removido com sucesso!'};
+const REJECT_MESSAGE = {severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação'};
+const CANCEL_MESSAGE = {severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a ação'};
+
 @Component({
   selector: 'app-lancamentos-pesquisa',
   templateUrl: './lancamentos-pesquisa.component.html',
@@ -25,8 +27,10 @@ export class LancamentosPesquisaComponent implements OnInit {
 
   constructor(private lancamentoService: LancamentoService,
               private messageService: MessageService,
-              private confirmationService: ConfirmationService
-              ) {}
+              private confirmationService: ConfirmationService,
+              private erroHandler: ErroHandlerService
+  ) {
+  }
 
   ngOnInit() {
     this.pesquisar()
@@ -47,6 +51,9 @@ export class LancamentosPesquisaComponent implements OnInit {
         this.lancamentos = result.content as Lancamento[];
         this.totalRecords = result.totalElements;
         this.loading = false;
+      },
+      error: (err) => {
+        this.erroHandler.handler(err)
       }
     });
   }
@@ -71,12 +78,17 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   private handleAccept(codigo: any) {
-    this.lancamentoService.excluir(codigo).subscribe(() => {
-      // Após a exclusão, redefinimos os filtros e atualizamos a grid
-      this.grid.first = 0; // Redefinimos o valor do primeiro item da grid
-      this.pagina = 0;
-      this.pesquisar(); // Atualizamos a grid
-      this.messageService.add(SUCCESS_MESSAGE);
+    this.lancamentoService.excluir(codigo).subscribe({
+      next: () => {
+        // Após a exclusão, redefinimos os filtros e atualizamos a grid
+        this.grid.first = 0; // Redefinimos o valor do primeiro item da grid
+        this.pagina = 0;
+        this.pesquisar(); // Atualizamos a grid
+        this.messageService.add(SUCCESS_MESSAGE);
+      },
+      error: err => {
+        this.erroHandler.handler(err)
+      }
     });
   }
 
