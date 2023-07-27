@@ -1,8 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { LancamentoFiltro, LancamentoService } from '../lancamento.service';
 import {Table} from "primeng/table";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 
+
+const SUCCESS_MESSAGE  = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento removido com sucesso!' };
+const REJECT_MESSAGE  = { severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação' };
+const CANCEL_MESSAGE  = { severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a ação' };
 @Component({
   selector: 'app-lancamentos-pesquisa',
   templateUrl: './lancamentos-pesquisa.component.html',
@@ -20,7 +24,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   loading = true;
 
   constructor(private lancamentoService: LancamentoService,
-              private messageService: MessageService
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService
               ) {}
 
   ngOnInit() {
@@ -52,17 +57,40 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.pesquisar()
   }
 
+
   onRemove(codigo: any) {
-    this.lancamentoService.excluir(codigo).subscribe(() => {
-      // Após a exclusão, redefinimos os filtros e atualizamos a grid
-      if(this.grid.first == 0) {
-        this.pesquisar()
-      }{
-        this.grid.first = 0;
-      }
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Lançamento removido com sucesso!' });
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja continuar?',
+      header: 'Confirmação',
+      icon: 'fa-solid fa-circle-question',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => this.handleAccept(codigo),
+      reject: (type: ConfirmEventType) => this.handleReject(type)
     });
   }
+
+  private handleAccept(codigo: any) {
+    this.lancamentoService.excluir(codigo).subscribe(() => {
+      // Após a exclusão, redefinimos os filtros e atualizamos a grid
+      this.grid.first = 0; // Redefinimos o valor do primeiro item da grid
+      this.pagina = 0;
+      this.pesquisar(); // Atualizamos a grid
+      this.messageService.add(SUCCESS_MESSAGE);
+    });
+  }
+
+  private handleReject(type: ConfirmEventType) {
+    switch (type) {
+      case ConfirmEventType.REJECT:
+        this.messageService.add(REJECT_MESSAGE);
+        break;
+      case ConfirmEventType.CANCEL:
+        this.messageService.add(CANCEL_MESSAGE);
+        break;
+    }
+  }
+
 }
 
 interface Lancamento {

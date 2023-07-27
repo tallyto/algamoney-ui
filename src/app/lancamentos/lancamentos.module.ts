@@ -19,7 +19,8 @@ import {LancamentoService} from "./lancamento.service";
 import {MessageModule} from "primeng/message";
 import {PaginatorModule} from "primeng/paginator";
 import {ToastModule} from "primeng/toast";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -43,10 +44,15 @@ import {MessageService} from "primeng/api";
         HttpClientModule,
         MessageModule,
         PaginatorModule,
-        ToastModule
+        ToastModule,
+        ConfirmDialogModule
     ],
   exports: [
   ],
-  providers: [LancamentoService, MessageService]
+  providers: [
+    LancamentoService,
+    MessageService,
+    ConfirmationService
+  ]
 })
 export class LancamentosModule { }
