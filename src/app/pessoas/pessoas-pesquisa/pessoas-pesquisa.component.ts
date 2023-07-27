@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaFilter, PessoasService } from "../pessoas.service";
 import { Table } from "primeng/table";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {ErroHandlerService} from "../../core/erro-handler.service";
+
+const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pessoa removida com sucesso!'};
+const REJECT_MESSAGE = {severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação'};
+const CANCEL_MESSAGE = {severity: 'warn', summary: 'Cancelado', detail: 'Você cancelou a ação'};
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -21,8 +25,10 @@ export class PessoasPesquisaComponent implements OnInit {
 
   constructor(private messageService: MessageService,
               private pessoaService: PessoasService,
-              private erroHandler: ErroHandlerService
-  ) {}
+              private erroHandler: ErroHandlerService,
+              private confirmationService: ConfirmationService
+  ) {
+  }
 
   ngOnInit() {
     this.pesquisar();
@@ -54,20 +60,43 @@ export class PessoasPesquisaComponent implements OnInit {
   }
 
   onRemove(codigo: any) {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja continuar?',
+      header: 'Confirmação',
+      icon: 'fa-solid fa-circle-question',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => this.handleAccept(codigo),
+      reject: (type: ConfirmEventType) => this.handleReject(type)
+    });
+  }
+
+  private handleAccept(codigo: any) {
     this.pessoaService.excluir(codigo).subscribe({
       next: () => {
-        if (this.grid.first === 0) {
-          this.pesquisar();
-        } else {
-          this.grid.first = 0;
-        }
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pessoa removida com sucesso!' });
+        // Após a exclusão, redefinimos os filtros e atualizamos a grid
+        this.grid.first = 0; // Redefinimos o valor do primeiro item da grid
+        this.pagina = 0;
+        this.pesquisar(); // Atualizamos a grid
+        this.messageService.add(SUCCESS_MESSAGE);
       },
       error: err => {
         this.erroHandler.handler(err)
       }
     });
   }
+
+  private handleReject(type: ConfirmEventType) {
+    switch (type) {
+      case ConfirmEventType.REJECT:
+        this.messageService.add(REJECT_MESSAGE);
+        break;
+      case ConfirmEventType.CANCEL:
+        this.messageService.add(CANCEL_MESSAGE);
+        break;
+    }
+  }
+
 }
 
 interface Pessoa {

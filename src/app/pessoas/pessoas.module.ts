@@ -12,6 +12,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {SharedModule} from "../shared/shared.module";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 
@@ -30,7 +31,8 @@ import {MessageService} from "primeng/api";
         InputMaskModule,
         InputTextModule,
         SharedModule,
-        ToastModule
+        ToastModule,
+        ConfirmDialogModule
     ],
   providers: [MessageService]
 })
