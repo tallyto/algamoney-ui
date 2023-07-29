@@ -26,6 +26,10 @@ export class PessoasService {
     });
   }
 
+  public listar() {
+    return this.http.get(this.baseUrl);
+  }
+
   excluir(codigo: any) {
     return this.http.delete(`${this.baseUrl}/${codigo}`)
   }

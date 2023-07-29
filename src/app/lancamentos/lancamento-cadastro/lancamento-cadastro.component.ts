@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriasService} from "../../categorias/categorias.service";
+import {PessoasService} from "../../pessoas/pessoas.service";
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -15,13 +16,12 @@ export class LancamentoCadastroComponent implements OnInit{
     {label: 'Despesa', value: 'DESPESA'}
   ]
 
-  pessoas = [
-    {label: "Tállyto", value: 1},
-    {label: "Yves", value: 2},
-    {label: "Gustavo", value: 3}
-  ]
+  pessoas = []
 
-  constructor(private categoriasService: CategoriasService) {
+  constructor(
+    private categoriasService: CategoriasService,
+    private pessoasService: PessoasService
+  ) {
 
   }
 
@@ -38,12 +38,31 @@ export class LancamentoCadastroComponent implements OnInit{
     })
   }
 
+  private handlerPessoas() {
+    this.pessoasService.listar().subscribe({
+      next: (value: any) => {
+        this.pessoas =  value.content.map((pessoa: Pessoa) => {
+          return {
+            label: pessoa.nome,
+            value: pessoa.codigo
+          }
+        })
+      }
+    })
+  }
+
   ngOnInit(): void {
     this.handlerCategorias()
+    this.handlerPessoas()
   }
 }
 
 interface Categoria {
+  codigo: number;
+  nome: string;
+}
+
+interface Pessoa {
   codigo: number;
   nome: string;
 }
