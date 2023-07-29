@@ -17,13 +17,14 @@ import {ButtonModule} from "primeng/button";
 import {AuthErrorInterceptor} from "./interceptors/auth-error.interceptor";
 import { LogoutComponent } from './logout/logout/logout.component';
 import {PasswordModule} from "primeng/password";
-import {NgOptimizedImage} from "@angular/common";
+import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LogoutComponent,
+    PageNotFoundComponent,
   ],
     imports: [
         BrowserModule,

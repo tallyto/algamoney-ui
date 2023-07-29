@@ -37,6 +37,6 @@ import {PessoasRoutingModule} from "./pessoas-routing.module";
         ReactiveFormsModule,
         PessoasRoutingModule
     ],
-  providers: [MessageService]
+  providers: []
 })
 export class PessoasModule { }
