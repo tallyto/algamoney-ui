@@ -9,8 +9,8 @@ import { AuthService } from '../services/auth.service';
   providers: [AuthService]
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
+  username = '';
+  password = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -20,7 +20,7 @@ export class LoginComponent {
         if (loginSuccess) {
           console.log('Login realizado com sucesso!');
           // Redirecionar para a página de pesquisa de pessoas após o login bem-sucedido
-          this.router.navigate(['/pessoa-pesquisa']);
+          this.router.navigate(['/lancamentos']);
         } else {
           console.log('Credenciais inválidas. Tente novamente.');
           // Realizar alguma ação apropriada para tratar o login sem sucesso, se necessário.

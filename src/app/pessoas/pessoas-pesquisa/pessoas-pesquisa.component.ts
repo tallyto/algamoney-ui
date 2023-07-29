@@ -3,6 +3,7 @@ import { PessoaFilter, PessoasService } from "../pessoas.service";
 import { Table } from "primeng/table";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {ErroHandlerService} from "../../core/erro-handler.service";
+import {Router} from "@angular/router";
 
 const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pessoa removida com sucesso!'};
 const REJECT_MESSAGE = {severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação'};
@@ -28,7 +29,8 @@ export class PessoasPesquisaComponent implements OnInit {
   constructor(private messageService: MessageService,
               private pessoaService: PessoasService,
               private erroHandler: ErroHandlerService,
-              private confirmationService: ConfirmationService
+              private confirmationService: ConfirmationService,
+              private router: Router
   ) {
   }
 
@@ -109,6 +111,10 @@ export class PessoasPesquisaComponent implements OnInit {
         this.updateGird()
       }
     })
+  }
+
+  novaPessoa() {
+    this.router.navigate(['/pessoas', 'new']);
   }
 }
 

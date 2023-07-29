@@ -13,6 +13,7 @@ import {SharedModule} from "../shared/shared.module";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {PessoasRoutingModule} from "./pessoas-routing.module";
 
 
 
@@ -33,7 +34,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
         SharedModule,
         ToastModule,
         ConfirmDialogModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PessoasRoutingModule
     ],
   providers: [MessageService]
 })

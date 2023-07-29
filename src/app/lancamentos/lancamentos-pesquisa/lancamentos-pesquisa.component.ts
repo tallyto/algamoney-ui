@@ -3,7 +3,7 @@ import {LancamentoFiltro, LancamentoService} from '../lancamento.service';
 import {Table} from "primeng/table";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {ErroHandlerService} from "../../core/erro-handler.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Lançamento removido com sucesso!'};
@@ -30,7 +30,8 @@ export class LancamentosPesquisaComponent implements OnInit {
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
               private erroHandler: ErroHandlerService,
-              private router: Router
+              private router: Router,
+              private route: ActivatedRoute
   ) {
   }
 
@@ -106,7 +107,11 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   newLancamento() {
-    this.router.navigate(["/lancamento-cadastro"])
+    this.router.navigate(['/lancamentos', 'new']);
+  }
+
+  onEdit(codigo: any) {
+    this.router.navigate(['/lancamentos', codigo]);
   }
 }
 

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import * as moment from "moment";
+import {Lancamento} from "../entities/lancamento/lancamento.model";
 
 export class LancamentoFiltro {
   descricao: string
@@ -48,4 +49,11 @@ export class LancamentoService {
     return this.http.post(this.baseUrl, lancamento)
   }
 
+  buscarPorId(lancamentoId: number) {
+    return this.http.get(`${this.baseUrl}/${lancamentoId}`)
+  }
+
+  atualizar(lancamentoId: number, lancamento: Lancamento) {
+    return this.http.put(`${this.baseUrl}/${lancamentoId}`, lancamento)
+  }
 }

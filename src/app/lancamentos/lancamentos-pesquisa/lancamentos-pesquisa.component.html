@@ -62,7 +62,7 @@
                 [ngStyle]="{color: lancamento.tipo === 'DESPESA'? 'red' : 'blue'}">{{ lancamento.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
             <td class="col-actions">
               <div class="button-container">
-                <button aria-label="editar" pButton style="margin: 0 5px" icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
+                <button aria-label="editar" (click)="onEdit(lancamento.codigo)" pButton style="margin: 0 5px" icon="fas fa-pencil" pTooltip="Editar" tooltipPosition="top"></button>
                 <button aria-label="excluir" pButton style="margin: 0 5px" icon="fas fa-trash" (click)="onRemove(lancamento.codigo)" pTooltip="Excluir" tooltipPosition="top"></button>
               </div>
             </td>

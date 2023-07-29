@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PessoasService} from "../pessoas.service";
 import {MessageService} from "primeng/api";
 import {Pessoa} from "../../entities/pessoa/pessoa.model";
 
-const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pessoa salva com sucesso!'};
+const SAVE_SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pessoa salva com sucesso!'};
+const UPDATE_SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pessoa atualizada com sucesso!'};
 
 @Component({
   selector: 'app-pessoas-cadastro',
@@ -13,16 +14,35 @@ const SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail: 'Pesso
   styleUrls: ['./pessoas-cadastro.component.css']
 })
 export class PessoasCadastroComponent implements OnInit {
+  pessoaId: number | null = null; // Variável para armazenar o ID da pessoa (se houver)
   public formPessoa: FormGroup
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private pessoaService: PessoasService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id === 'new') {
+        // Nova pessoa, não há ID
+        this.pessoaId = null;
+      } else {
+        // Edição de pessoa, temos um ID
+        this.pessoaId = +id;
+        // Carregar os dados da pessoa com ID this.pessoaId e preencher o formulário
+        // Por exemplo:
+        this.pessoaService.buscarPorId(this.pessoaId).subscribe({
+          next: (pessoa) => {
+            this.formPessoa.patchValue(pessoa);
+          }
+        });
+      }
+    });
     this.formPessoa = this.getPessoaFormBuilder()
   }
 
@@ -48,14 +68,25 @@ export class PessoasCadastroComponent implements OnInit {
   }
 
   onSave() {
-    if(this.formPessoa.valid) {
+    if (this.formPessoa.valid) {
       const pessoa = Pessoa.fromDTO(this.formPessoa.value)
-      this.pessoaService.inserir(pessoa).subscribe({
-        next: () => {
-          this.formPessoa.reset()
-          this.messageService.add(SUCCESS_MESSAGE)
-        }
-      })
+      if (this.pessoaId === null) {
+        this.pessoaService.inserir(pessoa).subscribe({
+          next: () => {
+            this.formPessoa.reset()
+            this.messageService.add(SAVE_SUCCESS_MESSAGE)
+            this.goBack()
+          }
+        })
+      } else {
+        this.pessoaService.atualizar(this.pessoaId, pessoa).subscribe({
+          next: (pessoa) => {
+            this.messageService.add(UPDATE_SUCCESS_MESSAGE)
+            this.formPessoa.reset()
+            this.goBack()
+          }
+        })
+      }
     }
   }
 }

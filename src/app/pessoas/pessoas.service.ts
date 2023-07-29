@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
+import {Pessoa} from "../entities/pessoa/pessoa.model";
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,14 @@ export class PessoasService {
 
   inserir(pessoa: any) {
     return this.http.post(this.baseUrl, pessoa)
+  }
+
+  buscarPorId(pessoaId: number) {
+    return this.http.get(`${this.baseUrl}/${pessoaId}`)
+  }
+
+  atualizar(pessoaId: number, pessoa: Pessoa) {
+    return this.http.put(`${this.baseUrl}/${pessoaId}`, pessoa)
   }
 }
 

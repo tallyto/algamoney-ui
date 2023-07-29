@@ -21,6 +21,7 @@ import {PaginatorModule} from "primeng/paginator";
 import {ToastModule} from "primeng/toast";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {LancamentosRoutingModule} from "./lancamentos-routing.module";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
         PaginatorModule,
         ToastModule,
         ConfirmDialogModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        LancamentosRoutingModule
     ],
   exports: [
   ],

@@ -17,6 +17,7 @@ import {ButtonModule} from "primeng/button";
 import {AuthErrorInterceptor} from "./interceptors/auth-error.interceptor";
 import { LogoutComponent } from './logout/logout/logout.component';
 import {PasswordModule} from "primeng/password";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -24,19 +25,20 @@ import {PasswordModule} from "primeng/password";
     LoginComponent,
     LogoutComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule,
-    LancamentosModule,
-    PessoasModule,
-    CoreModule,
-    FormsModule,
-    CardModule,
-    InputTextModule,
-    ButtonModule,
-    PasswordModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        SharedModule,
+        LancamentosModule,
+        PessoasModule,
+        CoreModule,
+        FormsModule,
+        CardModule,
+        InputTextModule,
+        ButtonModule,
+        PasswordModule,
+        NgOptimizedImage,
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },

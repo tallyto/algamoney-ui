@@ -6,7 +6,7 @@ import {catchError, map, Observable, of, tap} from "rxjs";
   providedIn: 'root'
 })
 export class AuthService {
-  private token: string = '';
+  private token = '';
 
   constructor(private http: HttpClient) {}
 
