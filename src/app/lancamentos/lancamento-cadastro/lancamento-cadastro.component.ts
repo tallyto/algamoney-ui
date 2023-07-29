@@ -46,6 +46,10 @@ export class LancamentoCadastroComponent implements OnInit {
     this.loadPessoas();
   }
 
+  public isNew() {
+    return this.lancamentoId !== null;
+  }
+
   private handleRouteParams(params: any): void {
     const id = params['id'];
     if (id === 'new') {
