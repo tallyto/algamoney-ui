@@ -1,17 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoriasService} from "../../categorias/categorias.service";
-import {PessoasService} from "../../pessoas/pessoas.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LancamentoService} from "../lancamento.service";
-import {MessageService} from "primeng/api";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Lancamento} from "../../entities/lancamento/lancamento.model";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { CategoriasService } from '../../categorias/categorias.service';
+import { PessoasService } from '../../pessoas/pessoas.service';
+import { LancamentoService } from '../lancamento.service';
+import { Lancamento } from '../../entities/lancamento/lancamento.model';
 
-const SUCCESS_MESSAGE = {severity: 'success',
-  summary: 'Sucesso', detail: 'Lançamento cadastrado com sucesso!'};
-
-const UPDATE_SUCCESS_MESSAGE = {severity: 'success',
-  summary: 'Sucesso', detail: 'Lançamento atualizado com sucesso!'};
+const SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento cadastrado com sucesso!' };
+const UPDATE_SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento atualizado com sucesso!' };
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -21,16 +18,13 @@ const UPDATE_SUCCESS_MESSAGE = {severity: 'success',
 export class LancamentoCadastroComponent implements OnInit {
   private lancamentoId: number | null = null;
   lancamento: Lancamento = new Lancamento();
-  categorias = []
-
+  categorias: any[] = [];
   tipos = [
-    {label: 'Receita', value: 'RECEITA'},
-    {label: 'Despesa', value: 'DESPESA'}
-  ]
-
-  pessoas = []
-
-  formLancamento: FormGroup;
+    { label: 'Receita', value: 'RECEITA' },
+    { label: 'Despesa', value: 'DESPESA' }
+  ];
+  pessoas: any[] = [];
+  formLancamento!: FormGroup;
 
   constructor(
     private categoriasService: CategoriasService,
@@ -40,37 +34,39 @@ export class LancamentoCadastroComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id === 'new') {
-        // Nova pessoa, não há ID
-        this.lancamentoId = null;
-      } else {
-        // Edição de pessoa, temos um ID
-        this.lancamentoId = +id;
-        // Carregar os dados da pessoa com ID this.pessoaId e preencher o formulário
-        // Por exemplo:
-        this.lancamentoService.buscarPorId(this.lancamentoId).subscribe({
-          next: (lancamentoApiData) => {
-            // Converta os dados da API para o formato do formulário usando toDTO
-            this.lancamento = Lancamento.toDTO(lancamentoApiData);
-            this.formLancamento.patchValue(this.lancamento);
-          }
-        });
-      }
+      this.handleRouteParams(params);
     });
-    this.formLancamento = this.getLancamentoFormBuilder()
-    this.handlerCategorias()
-    this.handlerPessoas()
+
+    this.formLancamento = this.getLancamentoFormBuilder();
+    this.loadCategorias();
+    this.loadPessoas();
   }
 
-  getLancamentoFormBuilder(){
-    const formBuilder = this.formBuilder.group({
+  private handleRouteParams(params: any): void {
+    const id = params['id'];
+    if (id === 'new') {
+      this.lancamentoId = null;
+    } else {
+      this.lancamentoId = +id;
+      this.loadLancamentoData(this.lancamentoId);
+    }
+  }
+
+  private loadLancamentoData(id: number): void {
+    this.lancamentoService.buscarPorId(id).subscribe({
+      next: (lancamentoApiData) => {
+        this.lancamento = Lancamento.toDTO(lancamentoApiData);
+        this.formLancamento.patchValue(this.lancamento);
+      }
+    });
+  }
+
+  private getLancamentoFormBuilder(): FormGroup {
+    return this.formBuilder.group({
       codigo: ['', []],
       descricao: ['', []],
       dataVencimento: ['', [Validators.required]],
@@ -80,76 +76,77 @@ export class LancamentoCadastroComponent implements OnInit {
       tipo: ['', [Validators.required]],
       categoria: ['', [Validators.required]],
       pessoa: ['', [Validators.required]],
-    })
-
-    return formBuilder
+    });
   }
 
-  private handlerCategorias() {
+  private loadCategorias(): void {
     this.categoriasService.listar().subscribe({
       next: (value: any) => {
         this.categorias = value.map((categoria: Categoria) => {
           return {
             label: categoria.nome,
             value: categoria.codigo
-          }
+          };
         });
 
-        // Verificar se existe uma categoria no lançamento atual
         if (this.lancamento.categoria) {
-          // Preencher o campo de categoria no formulário com a categoria correta
           this.formLancamento.patchValue({
             categoria: this.lancamento.categoria.codigo
           });
         }
       }
-    })
+    });
   }
 
-  private handlerPessoas() {
+  private loadPessoas(): void {
     this.pessoasService.listar().subscribe({
       next: (value: any) => {
         this.pessoas =  value.content.map((pessoa: Pessoa) => {
           return {
             label: pessoa.nome,
             value: pessoa.codigo
-          }
-        })
-        // Verificar se existe uma pessoa no lançamento atual
+          };
+        });
+
         if (this.lancamento.pessoa) {
-          // Preencher o campo de pessoa no formulário com a pessoa correta
           this.formLancamento.patchValue({
             pessoa: this.lancamento.pessoa.codigo
           });
         }
       }
-    })
+    });
   }
 
   onSave() {
     if (this.formLancamento.valid) {
-      const lancamento = Lancamento.fromDTO(this.formLancamento.value)
+      const lancamento = Lancamento.fromDTO(this.formLancamento.value);
       if (this.lancamentoId === null) {
-        this.lancamentoService.criar(lancamento).subscribe({
-          next: () => {
-            this.formLancamento.reset()
-            this.messageService.add(SUCCESS_MESSAGE)
-            this.goBack()
-          }
-        })
+        this.saveNewLancamento(lancamento);
       } else {
-        this.lancamentoService.atualizar(this.lancamentoId, lancamento).subscribe({
-          next: () => {
-            this.messageService.add(UPDATE_SUCCESS_MESSAGE)
-            this.formLancamento.reset()
-            this.goBack()
-          }
-        })
+        this.updateLancamento(this.lancamentoId, lancamento);
       }
     }
   }
 
+  private saveNewLancamento(lancamento: any): void {
+    this.lancamentoService.criar(lancamento).subscribe({
+      next: () => {
+        this.formLancamento.reset();
+        this.messageService.add(SUCCESS_MESSAGE);
+        this.goBack();
+      }
+    });
+  }
 
+  private updateLancamento(id: number, lancamento: any): void {
+    this.lancamentoService.atualizar(id, lancamento).subscribe({
+      next: () => {
+        this.messageService.add(UPDATE_SUCCESS_MESSAGE);
+        this.formLancamento.reset();
+        this.goBack();
+      }
+    });
+  }
 
   goBack() {
     this.router.navigate(['../']);
