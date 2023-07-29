@@ -37,6 +37,10 @@ export class PessoasService {
   handlerStatus(codigo: number, status: boolean) {
     return this.http.put(`${this.baseUrl}/${codigo}/ativo`, !status)
   }
+
+  inserir(pessoa: any) {
+    return this.http.post(this.baseUrl, pessoa)
+  }
 }
 
 export interface PessoaFilter {

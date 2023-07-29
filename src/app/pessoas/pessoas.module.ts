@@ -5,7 +5,7 @@ import {PessoasCadastroComponent} from "./pessoas-cadastro/pessoas-cadastro.comp
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
 import {TableModule} from "primeng/table";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {InputMaskModule} from "primeng/inputmask";
 import {InputTextModule} from "primeng/inputtext";
@@ -32,7 +32,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
         InputTextModule,
         SharedModule,
         ToastModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        ReactiveFormsModule
     ],
   providers: [MessageService]
 })
