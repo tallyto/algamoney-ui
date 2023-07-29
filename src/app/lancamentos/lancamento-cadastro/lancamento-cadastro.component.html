@@ -49,7 +49,7 @@
       <div class="col-12">
         <button aria-label="salvar" class="mr-2" pButton type="button" (click)="onSave()" [disabled]="formLancamento.invalid" label="Salvar"></button>
         <button pButton type="button"
-                label="Novo" class="p-button-info">
+                label="Novo" class="p-button-secondary" (click)="newLancamento()">
         </button>
         <a pButton class="p-button-link" (click)="goBack()">Voltar para a pesquisa</a>
       </div>

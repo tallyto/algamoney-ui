@@ -37,11 +37,12 @@ export class LancamentoCadastroComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.formLancamento = this.getLancamentoFormBuilder();
+
     this.route.params.subscribe(params => {
       this.handleRouteParams(params);
     });
 
-    this.formLancamento = this.getLancamentoFormBuilder();
     this.loadCategorias();
     this.loadPessoas();
   }
@@ -51,9 +52,11 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   private handleRouteParams(params: any): void {
+    debugger
     const id = params['id'];
     if (id === 'new') {
       this.lancamentoId = null;
+      this.formLancamento.patchValue(new Lancamento())
     } else {
       this.lancamentoId = +id;
       this.loadLancamentoData(this.lancamentoId);
@@ -141,10 +144,9 @@ export class LancamentoCadastroComponent implements OnInit {
 
   private saveNewLancamento(lancamento: any): void {
     this.lancamentoService.criar(lancamento).subscribe({
-      next: () => {
-        this.formLancamento.reset();
+      next: (lancamentoAdicionado: any) => {
         this.messageService.add(SUCCESS_MESSAGE);
-        this.goBack();
+        this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
       }
     });
   }
@@ -163,6 +165,11 @@ export class LancamentoCadastroComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['../']);
+  }
+
+  newLancamento() {
+    this.formLancamento.reset()
+    this.router.navigate(['/lancamentos', 'new'])
   }
 }
 

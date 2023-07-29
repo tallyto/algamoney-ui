@@ -8,7 +8,7 @@ export class Lancamento {
   dataPagamento: Date;
   valor: number;
   observacao: string;
-  tipo: Tipo;
+  tipo: Tipo = Tipo.RECEITA
   categoria: Partial<Categoria>;
   pessoa: Partial<Pessoa>;
 
