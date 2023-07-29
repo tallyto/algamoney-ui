@@ -37,7 +37,6 @@ import {NgOptimizedImage} from "@angular/common";
         InputTextModule,
         ButtonModule,
         PasswordModule,
-        NgOptimizedImage,
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

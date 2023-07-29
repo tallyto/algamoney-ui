@@ -52,7 +52,6 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   private handleRouteParams(params: any): void {
-    debugger
     const id = params['id'];
     if (id === 'new') {
       this.lancamentoId = null;
