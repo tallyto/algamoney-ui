@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { ErroHandlerService } from '../../core/erro-handler.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {Title} from "@angular/platform-browser";
 
 const SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento removido com sucesso!' };
 const REJECT_MESSAGE = { severity: 'error', summary: 'Rejeitado', detail: 'Você rejeitou a ação' };
@@ -31,10 +32,11 @@ export class LancamentosPesquisaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private erroHandler: ErroHandlerService,
     private router: Router,
-    private route: ActivatedRoute
+    private title: Title
   ) {}
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de Lançamentos')
     this.pesquisar();
   }
 

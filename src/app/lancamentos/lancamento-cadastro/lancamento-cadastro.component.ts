@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import {concatMap, concatWith, tap} from 'rxjs/operators';
 import { CategoriasService } from '../../categorias/categorias.service';
 import { PessoasService } from '../../pessoas/pessoas.service';
 import { LancamentoService } from '../lancamento.service';
 import { Lancamento } from '../../entities/lancamento/lancamento.model';
+import { Title } from '@angular/platform-browser';
+import {Observable} from "rxjs";
 
 const SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento cadastrado com sucesso!' };
 const UPDATE_SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento atualizado com sucesso!' };
@@ -33,7 +36,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private messageService: MessageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
@@ -45,17 +49,22 @@ export class LancamentoCadastroComponent implements OnInit {
 
     this.loadCategorias();
     this.loadPessoas();
+    this.handlerTitle()
   }
 
   public isNew() {
-    return this.lancamentoId !== null;
+    return this.lancamentoId === null;
+  }
+
+  private handlerTitle() {
+    this.isNew() ? this.title.setTitle('Cadastro de Lançamento') : this.title.setTitle('Edição de Lançamento')
   }
 
   private handleRouteParams(params: any): void {
     const id = params['id'];
     if (id === 'new') {
       this.lancamentoId = null;
-      this.formLancamento.patchValue(new Lancamento())
+      this.formLancamento.patchValue(new Lancamento());
     } else {
       this.lancamentoId = +id;
       this.loadLancamentoData(this.lancamentoId);
@@ -122,7 +131,7 @@ export class LancamentoCadastroComponent implements OnInit {
     });
   }
 
-  private setPessoa(){
+  private setPessoa() {
     if (this.lancamento.pessoa) {
       this.formLancamento.patchValue({
         pessoa: this.lancamento.pessoa.codigo
@@ -167,8 +176,8 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   newLancamento() {
-    this.formLancamento.reset()
-    this.router.navigate(['/lancamentos', 'new'])
+    this.formLancamento.reset();
+    this.router.navigate(['/lancamentos', 'new']);
   }
 }
 
