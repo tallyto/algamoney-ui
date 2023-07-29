@@ -93,13 +93,17 @@ export class LancamentoCadastroComponent implements OnInit {
           };
         });
 
-        if (this.lancamento.categoria) {
-          this.formLancamento.patchValue({
-            categoria: this.lancamento.categoria.codigo
-          });
-        }
+        this.setCategoria()
       }
     });
+  }
+
+  private setCategoria() {
+    if (this.lancamento.categoria) {
+      this.formLancamento.patchValue({
+        categoria: this.lancamento.categoria.codigo
+      });
+    }
   }
 
   private loadPessoas(): void {
@@ -111,14 +115,17 @@ export class LancamentoCadastroComponent implements OnInit {
             value: pessoa.codigo
           };
         });
-
-        if (this.lancamento.pessoa) {
-          this.formLancamento.patchValue({
-            pessoa: this.lancamento.pessoa.codigo
-          });
-        }
+        this.setPessoa()
       }
     });
+  }
+
+  private setPessoa(){
+    if (this.lancamento.pessoa) {
+      this.formLancamento.patchValue({
+        pessoa: this.lancamento.pessoa.codigo
+      });
+    }
   }
 
   onSave() {
@@ -144,10 +151,12 @@ export class LancamentoCadastroComponent implements OnInit {
 
   private updateLancamento(id: number, lancamento: any): void {
     this.lancamentoService.atualizar(id, lancamento).subscribe({
-      next: () => {
+      next: (lancamentoAtualizado) => {
         this.messageService.add(UPDATE_SUCCESS_MESSAGE);
-        this.formLancamento.reset();
-        this.goBack();
+        this.lancamento = Lancamento.toDTO(lancamentoAtualizado);
+        this.formLancamento.patchValue(this.lancamento);
+        this.setPessoa()
+        this.setCategoria()
       }
     });
   }
