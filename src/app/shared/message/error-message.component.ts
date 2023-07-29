@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
 @Component({
-  selector: 'app-message',
+  selector: 'app-error-message',
   template: `
     <small class="p-error" *ngIf="hasError()">
       {{text}}
@@ -10,7 +10,7 @@ import {FormControl} from "@angular/forms";
   `,
   styles: []
 })
-export class MessageComponent {
+export class ErrorMessageComponent {
   @Input()
   error: string;
   @Input()

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MessageComponent} from "./message/message.component";
+import {ErrorMessageComponent} from "./message/error-message.component";
 import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
   declarations: [
-    MessageComponent
+    ErrorMessageComponent
   ],
   imports: [
     CommonModule,
     FormsModule
   ],
   exports: [
-    MessageComponent
+    ErrorMessageComponent
   ]
 })
 export class SharedModule { }

@@ -44,4 +44,8 @@ export class LancamentoService {
     return this.http.delete(`${this.baseUrl}/${codigo}`)
   }
 
+  criar(lancamento: any) {
+    return this.http.post(this.baseUrl, lancamento)
+  }
+
 }

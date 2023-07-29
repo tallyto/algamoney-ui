@@ -7,7 +7,7 @@ import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {CalendarModule} from "primeng/calendar";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputNumberModule} from "primeng/inputnumber";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
@@ -45,7 +45,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
         MessageModule,
         PaginatorModule,
         ToastModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        ReactiveFormsModule
     ],
   exports: [
   ],

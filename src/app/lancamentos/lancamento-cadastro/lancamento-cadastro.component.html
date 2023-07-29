@@ -1,57 +1,57 @@
 <div class="container">
-
-  <form action="">
+  <p-toast></p-toast>
+  <form [formGroup]="formLancamento">
     <div class="grid">
       <div class="col-12">
         <h1>Novo Lançamento</h1>
       </div>
 
       <div class="col-12">
-        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+        <p-selectButton formControlName="tipo" [options]="tipos" #tipo></p-selectButton>
       </div>
 
       <div class="p-fluid col-6 md:col-3">
         <label for="vencimento">Vencimento</label>
-        <p-calendar id="vencimento" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar formControlName="dataVencimento" id="vencimento" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="p-fluid col-6 md:col-3">
-        <label for="receita">{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
-        <p-calendar id="receita" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+        <label for="tipo">{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+        <p-calendar formControlName="dataPagamento" id="tipo" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
       </div>
 
       <div class="p-fluid col-12 md:col-9">
         <label for="descricao">Descrição</label>
-        <input id="descricao" pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="5">
-        <app-message [control]="descricao" error="required" text="Informe uma descrição"></app-message>
+        <input formControlName="descricao" id="descricao" pInputText type="text" name="descricao" required minlength="5">
+<!--        <app-error-message [control]="descricao" error="required" text="Informe uma descrição"></app-error-message>-->
       </div>
       <div class="p-fluid col-6 md:col-3">
         <label for="valor">Valor</label>
-        <p-inputNumber id="valor" mode="currency" currency="BRL" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+        <p-inputNumber formControlName="valor" id="valor" mode="currency" currency="BRL" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
                        [max]="100000"></p-inputNumber>
       </div>
 
       <div class="p-fluid col-12 md:col-6">
         <label for="categoria">Categoria</label>
-        <p-dropdown id="categoria" [options]="categorias" [filter]="true" placeholder="Selecione"></p-dropdown>
+        <p-dropdown formControlName="categoria" id="categoria" [options]="categorias" [filter]="true" placeholder="Selecione"></p-dropdown>
       </div>
 
       <div class="p-fluid col-12 md:col-6">
         <label for="pessoa">Pessoa</label>
-        <p-dropdown id="pessoa" [options]="pessoas" [filter]="true" placeholder="Selecione"></p-dropdown>
+        <p-dropdown formControlName="pessoa" id="pessoa" [options]="pessoas" [filter]="true" placeholder="Selecione"></p-dropdown>
       </div>
 
       <div class="p-fluid col-12">
         <label for="observacao">Observação</label>
-        <textarea id="observacao" pInputTextarea rows="3" type="text"></textarea>
+        <textarea formControlName="observacao"  id="observacao" pInputTextarea rows="3" type="text"></textarea>
       </div>
 
       <div class="col-12">
-        <button aria-label="salvar" class="mr-2" pButton type="submit" [disabled]="true" label="Salvar"></button>
+        <button aria-label="salvar" class="mr-2" pButton type="button" (click)="onSave()" [disabled]="formLancamento.invalid" label="Salvar"></button>
         <button pButton type="button"
                 label="Novo" class="p-button-info">
         </button>
-        <a pButton class="p-button-link">Voltar para a pesquisa</a>
+        <a pButton class="p-button-link" (click)="goBack()">Voltar para a pesquisa</a>
       </div>
 
     </div>
