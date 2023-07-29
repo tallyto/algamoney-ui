@@ -31,7 +31,7 @@ export class PessoasService {
     return this.http.get(this.baseUrl);
   }
 
-  excluir(codigo: any) {
+  excluir(codigo: number) {
     return this.http.delete(`${this.baseUrl}/${codigo}`)
   }
 
@@ -39,7 +39,7 @@ export class PessoasService {
     return this.http.put(`${this.baseUrl}/${codigo}/ativo`, !status)
   }
 
-  inserir(pessoa: any) {
+  inserir(pessoa: Pessoa) {
     return this.http.post(this.baseUrl, pessoa)
   }
 

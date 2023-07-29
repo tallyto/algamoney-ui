@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import {ErrorMessageComponent} from "./message/error-message.component";
 import {FormsModule} from "@angular/forms";
 
-
-
 @NgModule({
   declarations: [
     ErrorMessageComponent

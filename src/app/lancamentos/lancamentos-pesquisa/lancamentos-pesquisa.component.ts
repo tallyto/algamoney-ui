@@ -3,7 +3,7 @@ import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
 import { Table } from 'primeng/table';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { ErroHandlerService } from '../../core/erro-handler.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {Title} from "@angular/platform-browser";
 
 const SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento removido com sucesso!' };
@@ -79,7 +79,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     });
   }
 
-  private handleAccept(codigo: any) {
+  private handleAccept(codigo: number) {
     this.lancamentoService.excluir(codigo).subscribe({
       next: () => {
         this.updateGridAfterExclusion();
@@ -112,7 +112,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     this.router.navigate(['/lancamentos', 'new']);
   }
 
-  onEdit(codigo: any) {
+  onEdit(codigo: number) {
     this.router.navigate(['/lancamentos', codigo]);
   }
 }

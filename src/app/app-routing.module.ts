@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => LancamentosRoutingModule},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  {path: 'page-not-found', component: PageNotFoundComponent},
+  { path: 'page-not-found', component: PageNotFoundComponent},
   { path: '**', redirectTo: 'page-not-found' }
 ];
 

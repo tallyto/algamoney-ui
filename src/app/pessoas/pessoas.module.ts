@@ -11,7 +11,6 @@ import {InputMaskModule} from "primeng/inputmask";
 import {InputTextModule} from "primeng/inputtext";
 import {SharedModule} from "../shared/shared.module";
 import {ToastModule} from "primeng/toast";
-import {MessageService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {PessoasRoutingModule} from "./pessoas-routing.module";
 

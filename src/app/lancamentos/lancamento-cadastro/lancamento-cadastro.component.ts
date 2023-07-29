@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import {concatMap, concatWith, tap} from 'rxjs/operators';
 import { CategoriasService } from '../../categorias/categorias.service';
 import { PessoasService } from '../../pessoas/pessoas.service';
 import { LancamentoService } from '../lancamento.service';
 import { Lancamento } from '../../entities/lancamento/lancamento.model';
 import { Title } from '@angular/platform-browser';
-import {Observable} from "rxjs";
 
 const SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento cadastrado com sucesso!' };
 const UPDATE_SUCCESS_MESSAGE = { severity: 'success', summary: 'Sucesso', detail: 'Lançamento atualizado com sucesso!' };
@@ -150,7 +148,7 @@ export class LancamentoCadastroComponent implements OnInit {
     }
   }
 
-  private saveNewLancamento(lancamento: any): void {
+  private saveNewLancamento(lancamento: Lancamento): void {
     this.lancamentoService.criar(lancamento).subscribe({
       next: (lancamentoAdicionado: any) => {
         this.messageService.add(SUCCESS_MESSAGE);
@@ -159,7 +157,7 @@ export class LancamentoCadastroComponent implements OnInit {
     });
   }
 
-  private updateLancamento(id: number, lancamento: any): void {
+  private updateLancamento(id: number, lancamento: Lancamento): void {
     this.lancamentoService.atualizar(id, lancamento).subscribe({
       next: (lancamentoAtualizado) => {
         this.messageService.add(UPDATE_SUCCESS_MESSAGE);
