@@ -116,6 +116,10 @@ export class PessoasPesquisaComponent implements OnInit {
   novaPessoa() {
     this.router.navigate(['/pessoas', 'new']);
   }
+
+  onEdit(codigo: number) {
+    this.router.navigate(['/pessoas', codigo]);
+  }
 }
 
 interface Pessoa {

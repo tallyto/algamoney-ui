@@ -9,9 +9,6 @@ export class Endereco {
 
   static fromDTO(dto: any): Endereco {
     const endereco = new Endereco();
-
-    // Mapear o endereço
-
     endereco.logradouro = dto.logradouro;
     endereco.numero = dto.numero;
     endereco.complemento = dto.complemento;
@@ -19,7 +16,6 @@ export class Endereco {
     endereco.cep = dto.cep;
     endereco.cidade = dto.cidade;
     endereco.estado = dto.estado;
-
     return endereco;
   }
 }

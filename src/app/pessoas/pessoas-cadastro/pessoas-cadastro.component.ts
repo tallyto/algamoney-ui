@@ -16,6 +16,7 @@ const UPDATE_SUCCESS_MESSAGE = {severity: 'success', summary: 'Sucesso', detail:
 export class PessoasCadastroComponent implements OnInit {
   pessoaId: number | null = null; // Variável para armazenar o ID da pessoa (se houver)
   public formPessoa: FormGroup
+  pessoa = new Pessoa()
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -38,7 +39,8 @@ export class PessoasCadastroComponent implements OnInit {
         // Por exemplo:
         this.pessoaService.buscarPorId(this.pessoaId).subscribe({
           next: (pessoa) => {
-            this.formPessoa.patchValue(pessoa);
+            this.pessoa = Pessoa.toDTO(pessoa)
+            this.formPessoa.patchValue(this.pessoa);
           }
         });
       }
@@ -64,7 +66,7 @@ export class PessoasCadastroComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['../']);
+    this.router.navigate(['pessoas']);
   }
 
   onSave() {
@@ -72,22 +74,26 @@ export class PessoasCadastroComponent implements OnInit {
       const pessoa = Pessoa.fromDTO(this.formPessoa.value)
       if (this.pessoaId === null) {
         this.pessoaService.inserir(pessoa).subscribe({
-          next: () => {
-            this.formPessoa.reset()
+          next: (pessoa: any) => {
             this.messageService.add(SAVE_SUCCESS_MESSAGE)
-            this.goBack()
+            this.router.navigate(['pessoas', pessoa.codigo])
           }
         })
       } else {
         this.pessoaService.atualizar(this.pessoaId, pessoa).subscribe({
-          next: (pessoa) => {
+          next: (pessoa: any) => {
             this.messageService.add(UPDATE_SUCCESS_MESSAGE)
-            this.formPessoa.reset()
-            this.goBack()
+            this.router.navigate(['pessoas', pessoa.codigo])
           }
         })
       }
     }
+  }
+
+  newPessoa() {
+    this.formPessoa.reset()
+    this.formPessoa.patchValue(new Pessoa())
+    this.router.navigate(['pessoas', 'new']);
   }
 }
 
