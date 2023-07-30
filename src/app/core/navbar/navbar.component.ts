@@ -13,9 +13,11 @@ export class NavbarComponent {
   }
 
   getUserName(){
-    const { sub } = this.authService.decodePayloadJWT()
+    return this.authService.decodePayloadJWT() && this.authService.decodePayloadJWT().sub
+  }
 
-     return sub
+  hasPermition(permition: string) {
+    return  this.authService.hasPermition(permition)
   }
 
   handlerMenu(){

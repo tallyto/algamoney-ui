@@ -45,6 +45,21 @@ export class AuthService {
     }
   }
 
+  hasPermition(permition: string) {
+    return this.decodePayloadJWT() && this.decodePayloadJWT().role === permition
+  }
+
+  isTokenExpired(): boolean {
+    try {
+      const decodedToken: any = this.decodePayloadJWT()
+      const expirationTime: number = decodedToken.exp;
+      const currentTime: number = Math.floor(Date.now() / 1000);
+      return currentTime >= expirationTime;
+    } catch (error) {
+      return true; // Em caso de erro ou token inválido, consideramos como expirado.
+    }
+  }
+
   // Método para realizar logout e limpar o estado de autenticação e o token
   logout(): void {
     localStorage.setItem('accessToken', '');

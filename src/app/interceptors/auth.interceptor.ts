@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // Verifique se o usuário está autenticado antes de enviar o token
 
     const token = this.authService.getToken();
-    if (token) {
+    if (token && !this.authService.isTokenExpired()) {
       const authReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`
