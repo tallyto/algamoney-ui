@@ -5,6 +5,7 @@ import {LogoutComponent} from "./logout/logout/logout.component";
 import {PageNotFoundComponent} from "./errors/page-not-found/page-not-found.component";
 import {LancamentosRoutingModule} from "./lancamentos/lancamentos-routing.module";
 import {PessoasRoutingModule} from "./pessoas/pessoas-routing.module";
+import {NotAuthorizedComponent} from "./errors/not-authorized/not-authorized.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'lancamentos', pathMatch: "full" },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'page-not-found', component: PageNotFoundComponent},
+  { path: 'not-authorized', component: NotAuthorizedComponent},
   { path: '**', redirectTo: 'page-not-found' }
 ];
 

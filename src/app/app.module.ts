@@ -19,6 +19,9 @@ import { LogoutComponent } from './logout/logout/logout.component';
 import {PasswordModule} from "primeng/password";
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 import {ToastModule} from "primeng/toast";
+import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
+import {MessageModule} from "primeng/message";
+import {PanelModule} from "primeng/panel";
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import {ToastModule} from "primeng/toast";
     LoginComponent,
     LogoutComponent,
     PageNotFoundComponent,
+    NotAuthorizedComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,8 @@ import {ToastModule} from "primeng/toast";
     ButtonModule,
     PasswordModule,
     ToastModule,
+    MessageModule,
+    PanelModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

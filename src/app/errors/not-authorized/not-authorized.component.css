@@ -1,0 +1,11 @@
+/* unauthorized-page.component.css */
+.unauthorized-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.unauthorized-content {
+  text-align: center;
+}

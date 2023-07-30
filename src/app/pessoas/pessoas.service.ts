@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Pessoa} from "../entities/pessoa/pessoa.model";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PessoasService {
 
-  private baseUrl = "http://localhost:3000/pessoas"
+  private baseUrl: string
 
   constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.apiUrl}/pessoas`
   }
 
   public pesquisar(filter: PessoaFilter) {

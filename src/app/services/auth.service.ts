@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {catchError, map, Observable, of, tap} from "rxjs";
 import * as jwtDecode from "jwt-decode";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private token = '';
+  baseUrl: string
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.baseUrl = `${environment.apiUrl}/auth/login`
+  }
 
   // Método para realizar login e obter o token JWT
   login(username: string, password: string): Observable<boolean> {
@@ -19,7 +23,7 @@ export class AuthService {
     };
 
     // Substitua a URL pelo endpoint da API de login fornecido pelo cURL
-    return this.http.post<any>('http://localhost:3000/auth/login', loginData).pipe(
+    return this.http.post<any>(this.baseUrl, loginData).pipe(
       tap((response) => {
         // Se a resposta da API contiver o token JWT, armazene-o e defina o estado de autenticação como verdadeiro
         if (response.token) {
@@ -47,6 +51,13 @@ export class AuthService {
 
   hasPermition(permition: string) {
     return this.decodePayloadJWT() && this.decodePayloadJWT().role === permition
+  }
+
+  getRole(): string{
+    if(this.decodePayloadJWT()){
+      return this.decodePayloadJWT().role
+    }
+    return ''
   }
 
   isTokenExpired(): boolean {
