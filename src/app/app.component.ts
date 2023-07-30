@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'algamoney-ui';
 
   showNavbar(){
-    return this.route.url !== '/login'
+    return this.route.url !== '/login' && this.route.url !== '/logout'
   }
 
 }

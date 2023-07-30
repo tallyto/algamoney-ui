@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {catchError, map, Observable, of, tap} from "rxjs";
+import * as jwtDecode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,13 @@ export class AuthService {
   }
 
 
+  public decodePayloadJWT() : any {
+    try {
+      return jwtDecode.default(this.getToken())
+    } catch (error) {
+      return null
+    }
+  }
 
   // Método para realizar logout e limpar o estado de autenticação e o token
   logout(): void {
