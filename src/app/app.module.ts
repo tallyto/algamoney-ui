@@ -18,6 +18,7 @@ import {AuthErrorInterceptor} from "./interceptors/auth-error.interceptor";
 import { LogoutComponent } from './logout/logout/logout.component';
 import {PasswordModule} from "primeng/password";
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -26,19 +27,20 @@ import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.co
     LogoutComponent,
     PageNotFoundComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        SharedModule,
-        LancamentosModule,
-        PessoasModule,
-        CoreModule,
-        FormsModule,
-        CardModule,
-        InputTextModule,
-        ButtonModule,
-        PasswordModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    LancamentosModule,
+    PessoasModule,
+    CoreModule,
+    FormsModule,
+    CardModule,
+    InputTextModule,
+    ButtonModule,
+    PasswordModule,
+    ToastModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthErrorInterceptor, multi: true },
