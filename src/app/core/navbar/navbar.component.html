@@ -10,12 +10,20 @@
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario" >{{getUserName() }}</li>
 
-    <li class="navbar-menu-item" *ngIf="hasPermition('admin')" routerLinkActive="ativo">
+    <li class="navbar-menu-item" routerLinkActive="ativo">
       <a routerLink="/lancamentos" routerLinkActive="active" (click)="handlerMenu()">Lançamentos</a>
     </li>
 
-    <li class="navbar-menu-item" *ngIf="hasPermition('admin')"  routerLinkActive="ativo">
+    <li class="navbar-menu-item"  routerLinkActive="ativo">
       <a routerLink="/pessoas" routerLinkActive="active" (click)="handlerMenu()">Pessoas</a>
+    </li>
+
+    <li class="navbar-menu-item"  routerLinkActive="ativo">
+      <a routerLink="/dashboard" routerLinkActive="active" (click)="handlerMenu()">Dashboard</a>
+    </li>
+
+    <li class="navbar-menu-item"  routerLinkActive="ativo">
+      <a routerLink="/report" routerLinkActive="active" (click)="handlerMenu()">Relatórios</a>
     </li>
 
     <li class="navbar-menu-item" routerLinkActive="ativo">

@@ -24,6 +24,7 @@ import {MessageModule} from "primeng/message";
 import {PanelModule} from "primeng/panel";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import { ReportComponent } from './report/report/report.component';
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ReportComponent } from './report/report/report.component';
     ToastModule,
     MessageModule,
     PanelModule,
-    DashboardModule
+    DashboardModule,
+    CalendarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -21,10 +21,14 @@ export class DashboardService {
     return this.http.get(`${this.baseUrl}/lancamentos/estatisticas/por-dia`);
   }
 
-  lancamentosPorPessoa(inicio: string, fim: string) {
+  lancamentosPorPessoa(inicio: Date, fim: Date) {
     let params = new HttpParams()
-    params = params.append("dataDeVencimentoDe", inicio)
-    params = params.append("dataDeVencimentoAte", fim)
+    if (inicio) {
+      params = params.append('dataDeVencimentoDe', moment(inicio).format("YYYY-MM-DD"));
+    }
+    if (fim) {
+      params = params.append('dataDeVencimentoAte', moment(fim).format("YYYY-MM-DD"));
+    }
 
     return this.http.get(`${this.baseUrl}/lancamentos/estatisticas/por-pessoa`, {
       params
