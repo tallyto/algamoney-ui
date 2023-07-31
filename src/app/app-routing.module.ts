@@ -9,10 +9,10 @@ import {NotAuthorizedComponent} from "./errors/not-authorized/not-authorized.com
 import {DashboardRoutingModule} from "./dashboard/dashboard-routing.module";
 
 const routes: Routes = [
-  { path: '', loadChildren: () => PessoasRoutingModule},
+  { path: '', redirectTo: 'dashboard', pathMatch: "full" },
+    { path: '', loadChildren: () => PessoasRoutingModule},
   { path: '', loadChildren: () => LancamentosRoutingModule},
   { path: '', loadChildren: () => DashboardRoutingModule},
-  { path: '', redirectTo: 'dashboard', pathMatch: "full" },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'page-not-found', component: PageNotFoundComponent},

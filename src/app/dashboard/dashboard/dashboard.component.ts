@@ -1,5 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {DashboardService} from "../dashboard.service";
+import { Component, OnInit } from '@angular/core';
+import { DashboardService } from "../dashboard.service";
+
+interface LancamentoCategoria {
+  categoria: {
+    codigo: number;
+    nome: string;
+  };
+  total: number;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +18,11 @@ export class DashboardComponent implements OnInit {
   pieChartData: any;
   lineChartData: any;
 
-  constructor(private dashboardService: DashboardService) {
-    this.generateLineChartData();
-  }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.configurarGraficoPizza()
+    this.configurarGraficoPizza();
+    this.configurarGraficoLinha();
   }
 
   configurarGraficoPizza() {
@@ -31,25 +38,79 @@ export class DashboardComponent implements OnInit {
           ],
         };
       }
-    })
+    });
   }
 
-  generateRandomColors(numColors: number): string[] {
-    const colors: string[] = [];
-    const letters = '0123456789ABCDEF';
+  configurarGraficoLinha() {
+    this.dashboardService.lancamentosPorDia().subscribe({
+      next: (apiData: any) => {
+        const processedData = this.processData(apiData);
 
-    for (let i = 0; i < numColors; i++) {
-      let color = '#';
-      for (let j = 0; j < 6; j++) {
-        color += letters[Math.floor(Math.random() * 16)];
+        this.lineChartData = {
+          labels: processedData.dates,
+          datasets: [
+            {
+              label: 'Total Despesa',
+              data: processedData.despesaTotals,
+              fill: false,
+              borderColor: 'rgb(255, 0, 0)',
+              tension: 0.1
+            },
+            {
+              label: 'Total Receita',
+              data: processedData.receitaTotals,
+              fill: false,
+              borderColor: 'rgb(0, 128, 0)',
+              tension: 0.1
+            }
+          ]
+        };
       }
-      colors.push(color);
-    }
-
-    return colors;
+    });
   }
 
-   generateBeautifulRandomColors(numColors: number): string[] {
+  processData(apiData: any) {
+    const chartDataMap = new Map();
+    const dates: any = [];
+    const despesaTotals: any = [];
+    const receitaTotals: any = [];
+
+    apiData.forEach((entry: any) => {
+      const date = new Date(entry.dia).toLocaleDateString();
+
+      if (!chartDataMap.has(date)) {
+        chartDataMap.set(date, {
+          despesaTotal: 0,
+          receitaTotal: 0
+        });
+        dates.push(date);
+      }
+
+      const chartData = chartDataMap.get(date);
+
+      if (entry.tipoLancamento === 'DESPESA') {
+        chartData.despesaTotal += entry.total;
+      } else if (entry.tipoLancamento === 'RECEITA') {
+        chartData.receitaTotal += entry.total;
+      }
+    });
+
+    dates.forEach((date: any) => {
+      const chartData = chartDataMap.get(date);
+      despesaTotals.push(chartData.despesaTotal);
+      receitaTotals.push(chartData.receitaTotal);
+    });
+
+    return {
+      dates,
+      despesaTotals,
+      receitaTotals
+    };
+  }
+
+
+
+  generateBeautifulRandomColors(numColors: number): string[] {
     const colors: string[] = [];
 
     for (let i = 0; i < numColors; i++) {
@@ -63,45 +124,4 @@ export class DashboardComponent implements OnInit {
 
     return colors;
   }
-
-
-  generateLineChartData() {
-    this.lineChartData = {
-      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-      datasets: [
-        {
-          label: 'Receitas',
-          data: this.generateRandomData(6, 2000, 8000),
-          borderColor: 'green',
-          fill: false,
-        },
-        {
-          label: 'Despesas',
-          data: this.generateRandomData(6, 1000, 5000),
-          borderColor: 'red',
-          fill: false,
-        },
-      ],
-    };
-  }
-
-  generateRandomData(count: number, min: number, max: number) {
-    const data = [];
-    for (let i = 0; i < count; i++) {
-      data.push(this.getRandomNumber(min, max));
-    }
-    return data;
-  }
-
-  getRandomNumber(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-}
-
-interface LancamentoCategoria {
-  categoria: {
-    codigo: number,
-    nome: string
-  },
-  total: number
 }

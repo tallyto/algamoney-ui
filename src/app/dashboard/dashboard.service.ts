@@ -16,4 +16,8 @@ export class DashboardService {
   public lancamentosPorCategoria(){
      return this.http.get(`${this.baseUrl}/lancamentos/estatisticas/por-categoria`);
   }
+
+  lancamentosPorDia() {
+    return this.http.get(`${this.baseUrl}/lancamentos/estatisticas/por-dia`);
+  }
 }
