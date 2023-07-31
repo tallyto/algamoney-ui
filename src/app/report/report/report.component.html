@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-6">
+      <form (ngSubmit)="generateReport()">
+        <div class="p-field">
+          <label for="startDate">Data de Início:</label>
+          <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate" />
+        </div>
+        <div class="p-field">
+          <label for="endDate">Data de Fim:</label>
+          <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate" />
+        </div>
+        <button type="submit" pButton label="Gerar"></button>
+      </form>
+    </div>
+  </div>
+
+  <div class="grid" *ngIf="reportData && reportData.length > 0">
+    <div class="col-12 report-table" id="report-table">
+      <table>
+        <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Nome</th>
+          <th>Logradouro</th>
+          <th>Número</th>
+          <th>Complemento</th>
+          <th>Bairro</th>
+          <th>CEP</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+          <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of reportData">
+          <td>{{ item.tipo }}</td>
+          <td>{{ item.pessoa.nome }}</td>
+          <td>{{ item.pessoa.endereco.logradouro }}</td>
+          <td>{{ item.pessoa.endereco.numero }}</td>
+          <td>{{ item.pessoa.endereco.complemento }}</td>
+          <td>{{ item.pessoa.endereco.bairro }}</td>
+          <td>{{ item.pessoa.endereco.cep }}</td>
+          <td>{{ item.pessoa.endereco.cidade }}</td>
+          <td>{{ item.pessoa.endereco.estado }}</td>
+          <td>{{ item.total }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 report-buttons">
+      <button pButton type="button" label="Exportar para CSV" (click)="exportToCsv()"></button>
+      <button pButton type="button" label="Exportar para PDF" (click)="exportToPdf()"></button>
+    </div>
+  </div>
+</div>

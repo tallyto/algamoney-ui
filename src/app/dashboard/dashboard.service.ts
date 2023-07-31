@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-
+import * as moment from "moment";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,5 +19,15 @@ export class DashboardService {
 
   lancamentosPorDia() {
     return this.http.get(`${this.baseUrl}/lancamentos/estatisticas/por-dia`);
+  }
+
+  lancamentosPorPessoa(inicio: string, fim: string) {
+    let params = new HttpParams()
+    params = params.append("dataDeVencimentoDe", inicio)
+    params = params.append("dataDeVencimentoAte", fim)
+
+    return this.http.get(`${this.baseUrl}/lancamentos/estatisticas/por-pessoa`, {
+      params
+    });
   }
 }

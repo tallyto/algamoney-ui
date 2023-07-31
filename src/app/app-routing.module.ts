@@ -7,12 +7,14 @@ import {LancamentosRoutingModule} from "./lancamentos/lancamentos-routing.module
 import {PessoasRoutingModule} from "./pessoas/pessoas-routing.module";
 import {NotAuthorizedComponent} from "./errors/not-authorized/not-authorized.component";
 import {DashboardRoutingModule} from "./dashboard/dashboard-routing.module";
+import {ReportComponent} from "./report/report/report.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: "full" },
-    { path: '', loadChildren: () => PessoasRoutingModule},
+  { path: '', loadChildren: () => PessoasRoutingModule},
   { path: '', loadChildren: () => LancamentosRoutingModule},
   { path: '', loadChildren: () => DashboardRoutingModule},
+  { path: 'report', component: ReportComponent},
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'page-not-found', component: PageNotFoundComponent},

@@ -23,6 +23,7 @@ import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.c
 import {MessageModule} from "primeng/message";
 import {PanelModule} from "primeng/panel";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import { ReportComponent } from './report/report/report.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     LogoutComponent,
     PageNotFoundComponent,
     NotAuthorizedComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
