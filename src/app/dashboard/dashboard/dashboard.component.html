@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="p-grid">
+    <div class="col-12">
+      <h1>Lançamentos</h1>
+    </div>
+
+    <div class="p-grid flex" >
+      <div class="col-6">
+        <p-panel header="Lançamentos por categoria" >
+            <p-chart type="pie" [data]="pieChartData"></p-chart>
+        </p-panel>
+      </div>
+
+
+      <div class="col-6 p-fluid">
+        <p-panel header="Lançamentos por dia">
+          <p-chart type="line" [data]="lineChartData"> </p-chart>
+        </p-panel>
+      </div>
+    </div>
+
+
+  </div>
+</div>

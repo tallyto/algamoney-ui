@@ -22,6 +22,7 @@ import {ToastModule} from "primeng/toast";
 import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
 import {MessageModule} from "primeng/message";
 import {PanelModule} from "primeng/panel";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {PanelModule} from "primeng/panel";
     ToastModule,
     MessageModule,
     PanelModule,
+    DashboardModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

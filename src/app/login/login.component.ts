@@ -26,7 +26,7 @@ export class LoginComponent {
       (loginSuccess) => {
         if (loginSuccess) {
           this.messageService.add(SUCCESS_MESSAGE)
-          this.router.navigate(['/lancamentos']);
+          this.router.navigate(['/dashboard']);
         } else {
           this.messageService.add(ERROR_MESSAGE)
           // Realizar alguma ação apropriada para tratar o login sem sucesso, se necessário.
